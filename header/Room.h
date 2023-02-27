@@ -20,6 +20,7 @@ public:
 
     void drawRoom(sf::RenderWindow &window);
 
+    void Sviluppo_stanza();
 
 private:
 
