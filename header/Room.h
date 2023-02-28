@@ -22,6 +22,10 @@ public:
 
     void Sviluppo_stanza();
 
+    void Pick_Room();
+
+    void genera_FANGS();
+
 private:
 
 

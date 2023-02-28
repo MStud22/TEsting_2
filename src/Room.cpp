@@ -26,28 +26,13 @@ Room::Room(int width_, int height_) : width_(width_),height_(height_) {
 
 
 
-// Crea l'ingresso e l'uscita
-    float x = static_cast<float>(rand() % (width_ - 40) + 20);
-    float y = static_cast<float>(rand() % (height_ - 40) + 20);
-    Room::entrance.setSize(sf::Vector2f(20.f, 20.f));
-    Room::exit.setSize(sf::Vector2f(20.f, 20.f));
 
-    Room::entrance.setFillColor(sf::Color::Green);
-    Room::exit.setFillColor(sf::Color::Red);
-
-    Room::entrance.setPosition(x, y);
-
-    if (x < width_ / 2.f) {
-        Room::exit.setPosition(width_ - 30.f, y);
-    } else {
-        Room::exit.setPosition(0.f, y);
-    }
 
     //crea le pareti interne
-    generateInnerWalls();
+    Pick_Room();
 }
 
-
+//GENERA IN MODO AUTOMATICO PARETI INTERNE VEROSIMILI
 void Room::generateInnerWalls() {
     float wallWidth = 10.f;
     float minWidth = 30.f;
@@ -120,6 +105,78 @@ void Room::generateInnerWalls() {
         y += h + wallWidth;
     }
 }
+
+void Room::Pick_Room() {
+    //attraverso un random , scegli tra un numero pre impostato di stanze
+
+    // Genera un numero casuale compreso tra 1 e 5
+    std::srand(std::time(nullptr));
+    //int room_number = std::rand() % 5 + 1;
+    int room_number = 1; //TEST
+
+    if (room_number == 1) {
+        genera_FANGS();
+    }
+}
+
+void Room::genera_FANGS() {
+    float wallWidth = 30.f;
+    float wallHight = height_ / 3;
+
+    /*  for (float x = wallWidth; x < width_ - minWidth; ) {
+          float w = static_cast<float>(rand() % static_cast<int>((width_ - x - minWidth) / 2) + minWidth);
+          float h = wallWidth * 2.f;
+          float y = static_cast<float>(rand() % static_cast<int>(height_ - h - wallWidth) + wallWidth);
+
+          sf::RectangleShape wall(sf::Vector2f(w, h));
+          wall.setPosition(x, y);
+          wall.setFillColor(sf::Color::White);
+          innerWalls.push_back(wall);
+
+          x += w + wallWidth;
+      }*/
+    //GENERA I WALLS
+    //1
+    sf::RectangleShape wall(sf::Vector2f(wallWidth, wallHight));
+    wall.setPosition(width_ / 4, 0);
+    innerWalls.push_back(wall);
+    //2
+    sf::RectangleShape wall2(sf::Vector2f(wallWidth, wallHight));
+    wall2.setPosition(width_ / 4, height_ - (wallHight));
+    innerWalls.push_back(wall2);
+    //3
+    sf::RectangleShape wall3(sf::Vector2f(wallWidth, wallHight));
+    wall3.setPosition((width_ / 4) * 3, 0);
+    innerWalls.push_back(wall3);
+    //4
+    sf::RectangleShape wall4(sf::Vector2f(wallWidth, wallHight));
+    wall4.setPosition((width_ / 4) * 3, height_ - (wallHight));
+    innerWalls.push_back(wall4);
+
+    sf::RectangleShape CenterCube(sf::Vector2f(wallHight, wallHight));
+    CenterCube.setPosition(width_ / 2 - wallWidth * 2, (height_ / 3));
+    innerWalls.push_back(CenterCube);
+
+    //rende tutti i muri  su Innerwalls bianchi
+    for (auto &wall: innerWalls) {
+        wall.setFillColor(sf::Color::White);
+    }
+
+
+
+
+    // Crea l'ingresso e l'uscita
+
+    Room::entrance.setSize(sf::Vector2f(20.f, 20.f));
+    Room::exit.setSize(sf::Vector2f(20.f, 20.f));
+
+    Room::entrance.setFillColor(sf::Color::Green);
+    Room::exit.setFillColor(sf::Color::Red);
+
+    Room::entrance.setPosition(width_ / 10, height_ / 2);
+    Room::exit.setPosition(width_ - (width_ / 10), height_ / 2);
+}
+
 void Room::drawRoom(sf::RenderWindow &window) {
     window.draw(top);
     window.draw(bottom);
@@ -127,7 +184,7 @@ void Room::drawRoom(sf::RenderWindow &window) {
     window.draw(right);
     window.draw(entrance);
     window.draw(exit);
-    for (const auto &wall : innerWalls) {
+    for (const auto &wall: innerWalls) {
         window.draw(wall);
     }
 }
