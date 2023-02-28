@@ -111,7 +111,7 @@ void Room::Pick_Room() {
 
     // Genera un numero casuale compreso tra 1 e 5
     std::srand(std::time(nullptr));
-    int room_number = std::rand() % 2 + 1;
+    int room_number = std::rand() % 3 + 1;
 
 
     if (room_number == 1) {
@@ -119,6 +119,9 @@ void Room::Pick_Room() {
     }
     if (room_number == 2) {
         genera_ZIGZAG();
+    }
+    if (room_number == 3) {
+        genera_LONGCORRIDOR();
     }
 }
 
@@ -202,6 +205,39 @@ void Room::genera_ZIGZAG() {
     sf::RectangleShape wall3(sf::Vector2f(wallWidth, wallHight));
     wall3.setPosition((width_ / 5) * 4, 0);
     innerWalls.push_back(wall3);
+
+    //rende tutti i muri  su Innerwalls bianchi
+    for (auto &wall: innerWalls) {
+        wall.setFillColor(sf::Color::White);
+    }
+
+    // Crea l'ingresso e l'uscita
+
+    Room::entrance.setSize(sf::Vector2f(20.f, 20.f));
+    Room::exit.setSize(sf::Vector2f(20.f, 20.f));
+
+    Room::entrance.setFillColor(sf::Color::Green);
+    Room::exit.setFillColor(sf::Color::Red);
+
+    Room::entrance.setPosition(width_ / 10, height_ / 2);
+    Room::exit.setPosition(width_ - (width_ / 10), height_ / 2);
+}
+
+void Room::genera_LONGCORRIDOR() {
+    float wallWidth = width_;
+    float wallHight = height_ / 3;
+
+    //svuota innerWalls dai muri precedenti e ne crea nuovi
+    innerWalls.clear();
+    //GENERA I WALLS
+    //1
+    sf::RectangleShape wall(sf::Vector2f(wallWidth, wallHight));
+    wall.setPosition(0, 0);
+    innerWalls.push_back(wall);
+    //2
+    sf::RectangleShape wall2(sf::Vector2f(wallWidth, wallHight));
+    wall2.setPosition(0, (height_ / 3) * 2);
+    innerWalls.push_back(wall2);
 
     //rende tutti i muri  su Innerwalls bianchi
     for (auto &wall: innerWalls) {

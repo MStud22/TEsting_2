@@ -50,7 +50,7 @@ void Engine::run()
 
        /*////////////////////////////////////////////////////////////////////////////////////
               CODICE PER LIMITARE IL MOVIMENTO ALL'INTERNO DELLA FINESTRA
-         ///////////////////////////////////////////////////////////////////////////////////          */
+         ///////////////////////////////////////////////////////////////////////////////////*/
 
         if(p.getCollisionRect().intersects(room.top.getGlobalBounds()))
         {
@@ -90,8 +90,6 @@ void Engine::run()
         window.display();
 
 
-
-        // Impedisci al personaggio di uscire dai bordi della finestra
 
 
     }

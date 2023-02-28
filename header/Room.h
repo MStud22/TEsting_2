@@ -28,6 +28,8 @@ public:
 
     void genera_ZIGZAG();
 
+    void genera_LONGCORRIDOR();
+
 private:
 
 
