@@ -36,7 +36,7 @@ void Engine::run()
 
 
     //Main game loop , il gioco viene processato dalla classe engine
-    Personaggio p (400, 300, 30, window);
+    Personaggio p(100, 200, 30, window);
 
     Room room(800,400);
 
@@ -69,6 +69,7 @@ void Engine::run()
             p.Collision("right");
         }
 
+        //codice per collisione con muri interni
         for (const auto &wall : room.innerWalls) {
             if(p.testa_.getGlobalBounds().intersects(wall.getGlobalBounds()))
             {

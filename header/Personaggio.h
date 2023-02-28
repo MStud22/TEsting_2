@@ -11,15 +11,17 @@ public:
     float size_;
     sf::RectangleShape corpo_;
     string collisione;
-    sf::RectangleShape braccia_;
+
+    sf::RectangleShape bracciasx_;
+    sf::RectangleShape bracciadx_;
     sf::RectangleShape gambasx_;
     sf::RectangleShape gambadx_;
     sf::CircleShape testa_;
-    sf::RenderWindow& window_;
+    sf::RenderWindow &window_;
 
     Personaggio(float x, float y, float size, RenderWindow &window);
 
-    void disegna() ;
+    void disegna();
 
     void aggiornaPosizione();
     void Collision(string bordo);

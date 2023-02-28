@@ -7,40 +7,41 @@
 Personaggio::Personaggio(float x, float y, float size, RenderWindow& window) :
         x_(x), y_(y), size_(size), window_(window)
 {
+
+
     // Imposta i colori dei componenti dello stickman
     corpo_.setFillColor(sf::Color::White);
-    braccia_.setFillColor(sf::Color::White);
+    bracciadx_.setFillColor(sf::Color::White);
+    bracciasx_.setFillColor(sf::Color::White);
     gambadx_.setFillColor(sf::Color::White);
     gambasx_.setFillColor(sf::Color::White);
     testa_.setFillColor(sf::Color::White);
 
     // Imposta le dimensioni dei componenti dello stickman
-    corpo_.setSize(sf::Vector2f(size_ / 2, size_ ));
-    braccia_.setSize(sf::Vector2f(size_ / 0.7, size_ / 5));
-    gambadx_.setSize(sf::Vector2f(size_ / 5, size_ * 1.25 ));
-    gambasx_.setSize(sf::Vector2f(size_ / 5, size_ * 1.25 ));
-
-    // Posiziona i componenti dello stickman in relazione agli altri per ottenere una figura distinguibile
-    corpo_.setPosition(x_, y_ - size_);
-    braccia_.setPosition( corpo_.getPosition().x - (braccia_.getSize().x/3) ,corpo_.getPosition().y);
-    gambasx_.setPosition(corpo_.getPosition().x , y_);
-    gambadx_.setPosition(corpo_.getPosition().x + ((corpo_.getSize().x/7)*4)+1 , y_);
+    corpo_.setSize(sf::Vector2f(size_ / 2, size_));
+    bracciadx_.setSize(sf::Vector2f(size_ * 0.7, size_ / 5));
+    bracciasx_.setSize(sf::Vector2f(size_ * 0.7, size_ / 5));
+    gambadx_.setSize(sf::Vector2f(size_ / 5, size_ * 1.25));
+    gambasx_.setSize(sf::Vector2f(size_ / 5, size_ * 1.25));
 
     // Imposta le dimensioni e il colore della testa
-    testa_.setRadius(size_ / 4.5 );
+    testa_.setRadius(size_ / 4.5);
 
-    testa_.setPosition(corpo_.getPosition().x  , corpo_.getPosition().y - testa_.getRadius()*2);
+    setPosition(x_, y_);
+
+
 }
 
 void Personaggio::disegna() {
 
 
-        aggiornaPosizione();
-        window_.draw(corpo_);
-        window_.draw(braccia_);
-        window_.draw(gambadx_);
-        window_.draw(gambasx_);
-        window_.draw(testa_);
+    aggiornaPosizione();
+    window_.draw(corpo_);
+    window_.draw(bracciadx_);
+    window_.draw(bracciasx_);
+    window_.draw(gambadx_);
+    window_.draw(gambasx_);
+    window_.draw(testa_);
     Personaggio::collisione = "";
 
 }
@@ -75,13 +76,13 @@ float Personaggio::getPositiony()
     return   corpo_.getPosition().y;
 }
 
-void Personaggio::setPosition(float x ,float y)
-{
+void Personaggio::setPosition(float x ,float y) {
     corpo_.setPosition(x, y - size_);
-    braccia_.setPosition(corpo_.getPosition().x - (braccia_.getSize().x/3), corpo_.getPosition().y);
+    bracciadx_.setPosition(corpo_.getPosition().x + (corpo_.getSize().x), corpo_.getPosition().y);
+    bracciasx_.setPosition(corpo_.getPosition().x - (bracciasx_.getSize().x), corpo_.getPosition().y);
     gambasx_.setPosition(corpo_.getPosition().x, y);
-    gambadx_.setPosition(corpo_.getPosition().x + ((corpo_.getSize().x/7)*4)+1, y);
-    testa_.setPosition(corpo_.getPosition().x, corpo_.getPosition().y - testa_.getRadius()*2);
+    gambadx_.setPosition(corpo_.getPosition().x + ((corpo_.getSize().x / 7) * 4) + 1, y);
+    testa_.setPosition(corpo_.getPosition().x, corpo_.getPosition().y - testa_.getRadius() * 2);
 }
 
 
@@ -93,8 +94,8 @@ sf::FloatRect Personaggio::getCollisionRect() const {
     float right = corpo_.getPosition().x + corpo_.getSize().x;
     float bottom = corpo_.getPosition().y;
 
-    left = std::min(left, braccia_.getPosition().x - braccia_.getSize().x / 3);
-    top = std::min(top, braccia_.getPosition().y);
+    left = std::min(left, bracciasx_.getPosition().x - bracciasx_.getSize().x / 3);
+    top = std::min(top, bracciadx_.getPosition().y);
     right = std::max(right, gambadx_.getPosition().x + gambadx_.getSize().x);
     bottom = std::max(bottom, gambadx_.getPosition().y + gambadx_.getSize().y);
 
