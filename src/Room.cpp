@@ -111,30 +111,39 @@ void Room::Pick_Room() {
 
     // Genera un numero casuale compreso tra 1 e 5
     std::srand(std::time(nullptr));
-    //int room_number = std::rand() % 5 + 1;
-    int room_number = 1; //TEST
+    int room_number = std::rand() % 2 + 1;
+
 
     if (room_number == 1) {
         genera_FANGS();
     }
+    if (room_number == 2) {
+        genera_ZIGZAG();
+    }
 }
+
+
+
+void Room::drawRoom(sf::RenderWindow &window) {
+    window.draw(top);
+    window.draw(bottom);
+    window.draw(left);
+    window.draw(right);
+    window.draw(entrance);
+    window.draw(exit);
+    for (const auto &wall: innerWalls) {
+        window.draw(wall);
+    }
+}
+
 
 void Room::genera_FANGS() {
     float wallWidth = 30.f;
     float wallHight = height_ / 3;
 
-    /*  for (float x = wallWidth; x < width_ - minWidth; ) {
-          float w = static_cast<float>(rand() % static_cast<int>((width_ - x - minWidth) / 2) + minWidth);
-          float h = wallWidth * 2.f;
-          float y = static_cast<float>(rand() % static_cast<int>(height_ - h - wallWidth) + wallWidth);
+    //svuota innerWalls dai muri precedenti e ne crea nuovi
+    innerWalls.clear();
 
-          sf::RectangleShape wall(sf::Vector2f(w, h));
-          wall.setPosition(x, y);
-          wall.setFillColor(sf::Color::White);
-          innerWalls.push_back(wall);
-
-          x += w + wallWidth;
-      }*/
     //GENERA I WALLS
     //1
     sf::RectangleShape wall(sf::Vector2f(wallWidth, wallHight));
@@ -162,9 +171,6 @@ void Room::genera_FANGS() {
         wall.setFillColor(sf::Color::White);
     }
 
-
-
-
     // Crea l'ingresso e l'uscita
 
     Room::entrance.setSize(sf::Vector2f(20.f, 20.f));
@@ -177,19 +183,41 @@ void Room::genera_FANGS() {
     Room::exit.setPosition(width_ - (width_ / 10), height_ / 2);
 }
 
-void Room::drawRoom(sf::RenderWindow &window) {
-    window.draw(top);
-    window.draw(bottom);
-    window.draw(left);
-    window.draw(right);
-    window.draw(entrance);
-    window.draw(exit);
-    for (const auto &wall: innerWalls) {
-        window.draw(wall);
+void Room::genera_ZIGZAG() {
+    float wallWidth = 30.f;
+    float wallHight = height_ - 150.f;
+
+    //svuota innerWalls dai muri precedenti e ne crea nuovi
+    innerWalls.clear();
+    //GENERA I WALLS
+    //1
+    sf::RectangleShape wall(sf::Vector2f(wallWidth, wallHight));
+    wall.setPosition(width_ / 5, 0);
+    innerWalls.push_back(wall);
+    //2
+    sf::RectangleShape wall2(sf::Vector2f(wallWidth, wallHight));
+    wall2.setPosition((width_ / 2), height_ - wallHight);
+    innerWalls.push_back(wall2);
+    //3
+    sf::RectangleShape wall3(sf::Vector2f(wallWidth, wallHight));
+    wall3.setPosition((width_ / 5) * 4, 0);
+    innerWalls.push_back(wall3);
+
+    //rende tutti i muri  su Innerwalls bianchi
+    for (auto &wall: innerWalls) {
+        wall.setFillColor(sf::Color::White);
     }
+
+    // Crea l'ingresso e l'uscita
+
+    Room::entrance.setSize(sf::Vector2f(20.f, 20.f));
+    Room::exit.setSize(sf::Vector2f(20.f, 20.f));
+
+    Room::entrance.setFillColor(sf::Color::Green);
+    Room::exit.setFillColor(sf::Color::Red);
+
+    Room::entrance.setPosition(width_ / 10, height_ / 2);
+    Room::exit.setPosition(width_ - (width_ / 10), height_ / 2);
 }
-
-
-
 
 

@@ -26,6 +26,8 @@ public:
 
     void genera_FANGS();
 
+    void genera_ZIGZAG();
+
 private:
 
 

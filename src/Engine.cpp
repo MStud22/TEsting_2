@@ -85,8 +85,7 @@ void Engine::run()
         ////////////////////////////////////////////////////////////////////////////
         if(p.getCollisionRect().intersects((room.entrance.getGlobalBounds())))
         {
-           Room newroom(800,400);
-           room=newroom;
+           room.Pick_Room();
         }
         window.display();
 
