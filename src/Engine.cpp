@@ -48,19 +48,19 @@ void Engine::run()
         input();//prima di aggiornare lo scherma , controlla per gli input
 
 
-       /*////////////////////////////////////////////////////////////////////////////////////
-              CODICE PER LIMITARE IL MOVIMENTO ALL'INTERNO DELLA FINESTRA
-         ///////////////////////////////////////////////////////////////////////////////////*/
-
-        if(p.getCollisionRect().intersects(room.top.getGlobalBounds()))
-        {
+        /*////////////////////////////////////////////////////////////////////////////////////
+               CODICE PER LIMITARE IL MOVIMENTO
+          ///////////////////////////////////////////////////////////////////////////////////*/
+        //TODO fix collisioni
+        //TODO: problema : vengono rilevati correttamente i rettangoli degli oggetti (test rosso) ma il personjaggio non si ferma correttamente quando riceve l'input
+        if (p.getCollisionRect().intersects(room.top.getGlobalBounds())) {
             p.Collision("top");
         }
-        if(p.getCollisionRect().intersects(room.bottom.getGlobalBounds()))
-        {
+        if (p.getCollisionRect().intersects(room.bottom.getGlobalBounds())) {
             p.Collision("bottom");
+            p.corpo_.setFillColor(sf::Color::White);        //todo rimuovi test
         }
-        if(p.getCollisionRect().intersects(room.left.getGlobalBounds()))
+        if (p.getCollisionRect().intersects(room.left.getGlobalBounds()))
         {
             p.Collision("left");
         }
@@ -71,9 +71,10 @@ void Engine::run()
 
         //codice per collisione con muri interni
         for (const auto &wall : room.innerWalls) {
-            if(p.testa_.getGlobalBounds().intersects(wall.getGlobalBounds()))
-            {
-                p.Collision("top");
+            if (p.getCollisionRect().intersects(wall.getGlobalBounds())) {
+                p.corpo_.setFillColor(sf::Color::Red);       //todo rimuovi test
+                p.Collision(p.getCollisionDirection(wall.getGlobalBounds()));
+
             }
         }
 

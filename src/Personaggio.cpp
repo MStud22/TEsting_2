@@ -120,8 +120,35 @@ sf::FloatRect Personaggio::getCollisionRect() const {
     return sf::FloatRect(left, top, right - left, bottom - top);
 }
 
+// Funzione per determinare la direzione della collisione con un altro oggetto
+std::string Personaggio::getCollisionDirection(const sf::FloatRect &otherRect) const {
+    // Ottieni il rettangolo di collisione del personaggio
+    sf::FloatRect collisionRect = getCollisionRect();
 
-void Personaggio::Collision( string bordo) {
+    // Determina la posizione relativa dell'altro rettangolo rispetto al rettangolo di collisione del personaggio
+    float dx = otherRect.left - collisionRect.left;
+    float dy = otherRect.top - collisionRect.top;
+    float width = (otherRect.width + collisionRect.width) / 2;
+    float height = (otherRect.height + collisionRect.height) / 2;
+    float crossWidth = width * dy;
+    float crossHeight = height * dx;
+
+    std::string direction = "";
+
+    // Determina la direzione della collisione in base alla posizione relativa dei rettangoli
+    if (abs(dx) <= width && abs(dy) <= height) {
+        if (crossWidth > crossHeight) {
+            direction = (crossWidth > -crossHeight) ? "bottom" : "left";
+        } else {
+            direction = (crossWidth > -crossHeight) ? "right" : "top";
+        }
+    }
+
+    return direction;
+}
+
+
+void Personaggio::Collision(string bordo) {
     if (bordo == "top") {
         Personaggio::collisione = "top";
     }
