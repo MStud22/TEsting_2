@@ -27,6 +27,7 @@ Personaggio::Personaggio(float x, float y, float size, RenderWindow& window) :
     // Imposta le dimensioni e il colore della testa
     testa_.setRadius(size_ / 4.5);
 
+
     setPosition(x_, y_);
 
 
@@ -42,6 +43,7 @@ void Personaggio::disegna() {
     window_.draw(gambadx_);
     window_.draw(gambasx_);
     window_.draw(testa_);
+
     Personaggio::collisione = "";
 
 }
@@ -86,7 +88,6 @@ void Personaggio::setPosition(float x ,float y) {
 }
 
 
-//restituisce la hit box del personaggio
 sf::FloatRect Personaggio::getCollisionRect() const {
     // Calcola la posizione e le dimensioni del rettangolo di collisione del personaggio
     float left = corpo_.getPosition().x;
@@ -95,14 +96,21 @@ sf::FloatRect Personaggio::getCollisionRect() const {
     float bottom = corpo_.getPosition().y;
 
     left = std::min(left, bracciasx_.getPosition().x - bracciasx_.getSize().x / 3);
-    top = std::min(top, bracciadx_.getPosition().y);
-    right = std::max(right, gambadx_.getPosition().x + gambadx_.getSize().x);
-    bottom = std::max(bottom, gambadx_.getPosition().y + gambadx_.getSize().y);
+    top = std::min(top, std::min(bracciadx_.getPosition().y, bracciasx_.getPosition().y));
+    right = std::max(right, std::max(bracciadx_.getPosition().x + bracciadx_.getSize().x,
+                                     bracciasx_.getPosition().x + bracciasx_.getSize().x / 3));
+    bottom = std::max(bottom, std::max(bracciadx_.getPosition().y + bracciadx_.getSize().y,
+                                       bracciasx_.getPosition().y + bracciasx_.getSize().y));
 
     left = std::min(left, gambasx_.getPosition().x);
     top = std::min(top, gambasx_.getPosition().y);
     right = std::max(right, gambasx_.getPosition().x + gambasx_.getSize().x);
     bottom = std::max(bottom, gambasx_.getPosition().y + gambasx_.getSize().y);
+
+    left = std::min(left, gambadx_.getPosition().x);
+    top = std::min(top, gambadx_.getPosition().y);
+    right = std::max(right, gambadx_.getPosition().x + gambadx_.getSize().x);
+    bottom = std::max(bottom, gambadx_.getPosition().y + gambadx_.getSize().y);
 
     left = std::min(left, testa_.getPosition().x - testa_.getRadius());
     top = std::min(top, testa_.getPosition().y - testa_.getRadius());
