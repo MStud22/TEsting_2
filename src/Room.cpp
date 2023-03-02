@@ -104,14 +104,14 @@ void Room::genera_FANGS() {
 
     // Crea l'ingresso e l'uscita
 
+
     Room::entrance.setSize(sf::Vector2f(20.f, 20.f));
-    Room::exit.setSize(sf::Vector2f(20.f, 20.f));
 
-    Room::entrance.setFillColor(sf::Color::Green);
-    Room::exit.setFillColor(sf::Color::Red);
 
-    Room::entrance.setPosition(width_ / 10, height_ / 2);
-    Room::exit.setPosition(width_ - (width_ / 10), height_ / 2);
+    Room::entrance.setFillColor(sf::Color::Red);
+
+
+    Room::entrance.setPosition(width_ - (width_ / 10), height_ / 2);
 }
 
 void Room::genera_ZIGZAG() {
@@ -142,13 +142,12 @@ void Room::genera_ZIGZAG() {
     // Crea l'ingresso e l'uscita
 
     Room::entrance.setSize(sf::Vector2f(20.f, 20.f));
-    Room::exit.setSize(sf::Vector2f(20.f, 20.f));
 
-    Room::entrance.setFillColor(sf::Color::Green);
-    Room::exit.setFillColor(sf::Color::Red);
 
-    Room::entrance.setPosition(width_ / 10, height_ / 2);
-    Room::exit.setPosition(width_ - (width_ / 10), height_ / 2);
+    Room::entrance.setFillColor(sf::Color::Red);
+
+
+    Room::entrance.setPosition(width_ - (width_ / 10), height_ / 2);
 }
 
 void Room::genera_LONGCORRIDOR() {
@@ -174,14 +173,13 @@ void Room::genera_LONGCORRIDOR() {
 
     // Crea l'ingresso e l'uscita
 
+
     Room::entrance.setSize(sf::Vector2f(20.f, 20.f));
-    Room::exit.setSize(sf::Vector2f(20.f, 20.f));
 
-    Room::entrance.setFillColor(sf::Color::Green);
-    Room::exit.setFillColor(sf::Color::Red);
 
-    Room::entrance.setPosition(width_ / 10, height_ / 2);
-    Room::exit.setPosition(width_ - (width_ / 10), height_ / 2);
+    Room::entrance.setFillColor(sf::Color::Red);
+
+    Room::entrance.setPosition(width_ - (width_ / 10), height_ / 2);
 }
 
 

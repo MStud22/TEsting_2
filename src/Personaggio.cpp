@@ -44,7 +44,6 @@ void Personaggio::disegna() {
     window_.draw(gambasx_);
     window_.draw(testa_);
 
-    Personaggio::collisione = "";
 
 }
 
@@ -66,7 +65,7 @@ void Personaggio::aggiornaPosizione() {
             y_ += size_ / 10.0f;
             std::cout << collisione << endl;
         }
-
+    Personaggio::collisione = "";
         // Aggiorna la posizione dei componenti del personaggio
         setPosition(x_,y_);
 

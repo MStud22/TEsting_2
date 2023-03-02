@@ -63,7 +63,6 @@ void Engine::run()
                 }
             }
         }
-
         //codice per collisione con muri interni
         for (const auto &wall: room.innerWalls) {
             if (p.getCollisionRect().intersects(wall.getGlobalBounds())) {
@@ -81,6 +80,18 @@ void Engine::run()
 
         if (p.getCollisionRect().intersects((room.entrance.getGlobalBounds()))) {
             room.Pick_Room();
+            p.setPosition(100, 200);
+
+
+            //TODO testing
+            std::cout << p.corpo_.getPosition().x << endl;
+            sf::RectangleShape test;
+            test.setSize(p.corpo_.getSize());
+            test.setPosition(100, 200);
+            test.setFillColor(sf::Color::Magenta);
+            window.draw(test);
+            //TODO finish testing
+
         }
         window.display();
 
