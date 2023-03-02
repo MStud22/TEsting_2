@@ -19,27 +19,13 @@ void Engine::run()
 {
 
 
-    //impostazione sfondo , e lo adata alla finestra
-
-    Texture backgroundTexture;
-    backgroundTexture.loadFromFile("../assets/prato.jpg");
-    Vector2u textureSize = backgroundTexture.getSize();
-    Vector2u windowSize = window.getSize();
-    Sprite background(backgroundTexture);
-
-    // calcola la scala orizzontale e verticale
-    float scaleX = (float) windowSize.x / textureSize.x;
-    float scaleY = (float) windowSize.y / textureSize.y;
-
-// imposta la scala dello sprite
-    background.setScale(scaleX, scaleY);
-
-
-
     //Main game loop , il gioco viene processato dalla classe engine
-    Personaggio p(100, 200, 30, window);
 
+
+    Personaggio p(100, 200, 30, window);
+    //stanza e variabili di appoggio per il suo funzionamento
     Room room(800,400);
+
 
     while(window.isOpen() )
     {
@@ -53,14 +39,13 @@ void Engine::run()
                CODICE PER LIMITARE IL MOVIMENTO
           ///////////////////////////////////////////////////////////////////////////////////*/
 
-        //TODO fix collisioni
-        //TODO: problema : vengono rilevati correttamente i rettangoli degli oggetti (test rosso) ma il personjaggio non si ferma correttamente quando riceve l'input
+
         if (p.getCollisionRect().intersects(room.top.getGlobalBounds())) {
             p.Collision("top");
         }
         if (p.getCollisionRect().intersects(room.bottom.getGlobalBounds())) {
             p.Collision("bottom");
-            p.corpo_.setFillColor(sf::Color::White);        //todo rimuovi test
+            p.corpo_.setFillColor(sf::Color::White);
         }
         if (p.getCollisionRect().intersects(room.left.getGlobalBounds())) {
             p.Collision("left");
@@ -68,32 +53,21 @@ void Engine::run()
         if (p.getCollisionRect().intersects(room.right.getGlobalBounds())) {
             p.Collision("right");
         }
-
-        /*fixbug update ,update classe get collision direction , non rileva correttamente i rettangoli*/
-
-
+        if (p.getCollisionRect().intersects(room.top.getGlobalBounds()) ||
+            p.getCollisionRect().intersects(room.bottom.getGlobalBounds()) ||
+            p.getCollisionRect().intersects(room.left.getGlobalBounds()) ||
+            p.getCollisionRect().intersects(room.right.getGlobalBounds())) {
+            for (const auto &wall: room.OuterWalls) {
+                if (p.getCollisionRect().intersects(wall.getGlobalBounds())) {
+                    p.Collision(p.getCollisionDirection(wall.getGlobalBounds()));
+                }
+            }
+        }
 
         //codice per collisione con muri interni
         for (const auto &wall: room.innerWalls) {
             if (p.getCollisionRect().intersects(wall.getGlobalBounds())) {
-
-
-                //todo rimuovi test
-                sf::RectangleShape hitbox;
-                hitbox.setSize(Vector2f(wall.getGlobalBounds().width, wall.getGlobalBounds().height));
-                hitbox.setPosition(wall.getPosition().x, wall.getPosition().y);
-                hitbox.setFillColor(sf::Color::Blue);
-                sf::RectangleShape hitbox_p;
-                hitbox_p.setSize(Vector2f(p.getCollisionRect().width, p.getCollisionRect().height));
-                hitbox_p.setPosition(p.getCollisionRect().left, p.getCollisionRect().top);
-                hitbox_p.setFillColor(sf::Color::Yellow);
-                window.draw(hitbox);
-                window.draw(hitbox_p);
-                //todo rimuovi test
-
                 p.Collision(p.getCollisionDirection(wall.getGlobalBounds()));
-
-                std::cout << "collisione muro : " + p.collisione << endl;                //todo rimuovi test
             }
         }
 

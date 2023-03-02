@@ -48,8 +48,7 @@ void Personaggio::disegna() {
 
 }
 
-//TODO rimuovi test colllisione
-//TODO FIXBUG Collision viene aggiornato inb modo diverso dalla hit box
+
 void Personaggio::aggiornaPosizione() {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && Personaggio::collisione != "left") {
         x_ -= size_ / 10.0f;
