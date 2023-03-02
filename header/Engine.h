@@ -12,7 +12,7 @@ class Engine {
 private:
     //Window
     Vector2f resolution;
-    RenderWindow window;
+
     const unsigned int FPS = 60;
     static const Time TimeperFrame;
 
@@ -20,6 +20,7 @@ private:
 public:
     Engine();
 
+    RenderWindow window;
     void input();
 
 

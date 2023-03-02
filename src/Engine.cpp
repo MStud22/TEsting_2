@@ -3,6 +3,7 @@
 #include "../header/Engine.h"
 #include "../header/Personaggio.h"
 #include "../header/Room.h"
+#include "SnakeAnimation.cpp"
 
 
 const sf::Time Engine::TimeperFrame = seconds(1.f/60.f);        //creiamo una costante che definisce il Frame come un sessantesimo di secondo
@@ -15,21 +16,26 @@ Engine::Engine()
 
 }
 
-void Engine::run()
-{
-
+void Engine::run() {
+    //TODO TEST ANIMATIO
+    Clock clock;
+    SnakeAnimation snake(window);
+    float dt = clock.restart().asSeconds();
 
     //Main game loop , il gioco viene processato dalla classe engine
 
 
     Personaggio p(100, 200, 30, window);
     //stanza e variabili di appoggio per il suo funzionamento
-    Room room(800,400);
+    Room room(800, 400);
 
 
-    while(window.isOpen() )
+    while (window.isOpen())
     {
+
         window.clear();
+
+
         room.drawRoom(window);
         p.disegna();
         input();//prima di aggiornare lo scherma , controlla per gli input
@@ -79,6 +85,16 @@ void Engine::run()
         //////////////////////////////////////////////////////////////////////////*/
 
         if (p.getCollisionRect().intersects((room.entrance.getGlobalBounds()))) {
+
+            //TODO testing
+            window.clear();
+            snake.update(dt);
+            snake.draw();
+
+
+
+            //todo fine testing
+
             room.Pick_Room();
             p.setPosition(100, 200);
         }
