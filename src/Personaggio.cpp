@@ -117,34 +117,25 @@ sf::FloatRect Personaggio::getCollisionRect() const {
 }
 
 // Funzione per determinare la direzione della collisione con un altro oggetto
-std::string Personaggio::getCollisionDirection(const sf::FloatRect &otherRect) const {
-    // Ottieni il rettangolo di collisione del personaggio
-    sf::FloatRect collisionRect = getCollisionRect();
+std::string Personaggio::getCollisionDirection(const sf::FloatRect &rect) const {
+    // Controlla la posizione reciproca dei due rettangoli
+    float dx = (getCollisionRect().left + getCollisionRect().width / 2) - (rect.left + rect.width / 2);
+    float dy = (getCollisionRect().top + getCollisionRect().height / 2) - (rect.top + rect.height / 2);
+    float intersectX = std::abs(dx) - (getCollisionRect().width + rect.width) / 2;
+    float intersectY = std::abs(dy) - (getCollisionRect().height + rect.height) / 2;
 
-    std::string direction = "";
-
-    // Controlla se i rettangoli di collisione si sovrappongono
-    if (collisionRect.intersects(otherRect)) {
-        // Determina la posizione relativa dell'altro rettangolo rispetto al rettangolo di collisione del personaggio
-        float dx = otherRect.left - collisionRect.left;
-        float dy = otherRect.top - collisionRect.top;
-        float width = (otherRect.width + collisionRect.width) / 2;
-        float height = (otherRect.height + collisionRect.height) / 2;
-        float crossWidth = width * dy;
-        float crossHeight = height * dx;
-
-        // Determina la direzione della collisione in base alla posizione relativa dei rettangoli
-        if (abs(dx) <= width && abs(dy) <= height) {
-            if (crossWidth > crossHeight) {
-                direction = (crossWidth > -crossHeight) ? "bottom" : "left";
-            } else {
-                direction = (crossWidth > -crossHeight) ? "right" : "top";
-            }
+    // Se i rettangoli si intersecano, determina la direzione della collisione
+    if (intersectX <= 0 && intersectY <= 0) {
+        if (intersectX > intersectY) {
+            return dx > 0 ? "left" : "right";
+        } else {
+            return dy > 0 ? "top" : "bottom";
         }
+    } else {
+        return "";
     }
-
-    return direction;
 }
+
 
 
 void Personaggio::Collision(string bordo) {
