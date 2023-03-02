@@ -17,6 +17,7 @@ public:
     sf::RectangleShape gambadx_;
     sf::CircleShape testa_;
     sf::RenderWindow &window_;
+    float x_, y_;
 
     Personaggio(float x, float y, float size, RenderWindow &window);
 
@@ -37,7 +38,6 @@ public:
     string getCollisionDirection(const FloatRect &otherRect) const;
 
 private:
-    float x_, y_;
 
 
 };

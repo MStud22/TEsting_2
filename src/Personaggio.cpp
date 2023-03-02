@@ -79,6 +79,8 @@ void Personaggio::setPosition(float x ,float y) {
     gambasx_.setPosition(corpo_.getPosition().x, y);
     gambadx_.setPosition(corpo_.getPosition().x + ((corpo_.getSize().x / 7) * 4) + 1, y);
     testa_.setPosition(corpo_.getPosition().x, corpo_.getPosition().y - testa_.getRadius() * 2);
+    x_ = x;
+    y_ = y;
 }
 
 
