@@ -1,4 +1,5 @@
 
+#include <iostream>
 #include "../header/Engine.h"
 #include "../header/Personaggio.h"
 #include "../header/Room.h"
@@ -18,27 +19,13 @@ void Engine::run()
 {
 
 
-    //impostazione sfondo , e lo adata alla finestra
-
-    Texture backgroundTexture;
-    backgroundTexture.loadFromFile("../assets/prato.jpg");
-    Vector2u textureSize = backgroundTexture.getSize();
-    Vector2u windowSize = window.getSize();
-    Sprite background(backgroundTexture);
-
-    // calcola la scala orizzontale e verticale
-    float scaleX = (float) windowSize.x / textureSize.x;
-    float scaleY = (float) windowSize.y / textureSize.y;
-
-// imposta la scala dello sprite
-    background.setScale(scaleX, scaleY);
-
-
-
     //Main game loop , il gioco viene processato dalla classe engine
-    Personaggio p (400, 300, 30, window);
 
+
+    Personaggio p(100, 200, 30, window);
+    //stanza e variabili di appoggio per il suo funzionamento
     Room room(800,400);
+
 
     while(window.isOpen() )
     {
@@ -48,31 +35,39 @@ void Engine::run()
         input();//prima di aggiornare lo scherma , controlla per gli input
 
 
-       /*////////////////////////////////////////////////////////////////////////////////////
-              CODICE PER LIMITARE IL MOVIMENTO ALL'INTERNO DELLA FINESTRA
-         ///////////////////////////////////////////////////////////////////////////////////*/
+        /*////////////////////////////////////////////////////////////////////////////////////
+               CODICE PER LIMITARE IL MOVIMENTO
+          ///////////////////////////////////////////////////////////////////////////////////*/
 
-        if(p.getCollisionRect().intersects(room.top.getGlobalBounds()))
-        {
+
+        if (p.getCollisionRect().intersects(room.top.getGlobalBounds())) {
             p.Collision("top");
         }
-        if(p.getCollisionRect().intersects(room.bottom.getGlobalBounds()))
-        {
+        if (p.getCollisionRect().intersects(room.bottom.getGlobalBounds())) {
             p.Collision("bottom");
+            p.corpo_.setFillColor(sf::Color::White);
         }
-        if(p.getCollisionRect().intersects(room.left.getGlobalBounds()))
-        {
+        if (p.getCollisionRect().intersects(room.left.getGlobalBounds())) {
             p.Collision("left");
         }
-        if(p.getCollisionRect().intersects(room.right.getGlobalBounds()))
-        {
+        if (p.getCollisionRect().intersects(room.right.getGlobalBounds())) {
             p.Collision("right");
         }
+        if (p.getCollisionRect().intersects(room.top.getGlobalBounds()) ||
+            p.getCollisionRect().intersects(room.bottom.getGlobalBounds()) ||
+            p.getCollisionRect().intersects(room.left.getGlobalBounds()) ||
+            p.getCollisionRect().intersects(room.right.getGlobalBounds())) {
+            for (const auto &wall: room.OuterWalls) {
+                if (p.getCollisionRect().intersects(wall.getGlobalBounds())) {
+                    p.Collision(p.getCollisionDirection(wall.getGlobalBounds()));
+                }
+            }
+        }
 
-        for (const auto &wall : room.innerWalls) {
-            if(p.testa_.getGlobalBounds().intersects(wall.getGlobalBounds()))
-            {
-                p.Collision("top");
+        //codice per collisione con muri interni
+        for (const auto &wall: room.innerWalls) {
+            if (p.getCollisionRect().intersects(wall.getGlobalBounds())) {
+                p.Collision(p.getCollisionDirection(wall.getGlobalBounds()));
             }
         }
 
@@ -80,16 +75,14 @@ void Engine::run()
 
 
 
-        /////////////////////////////////////////////////////////////////////////////
+        /*///////////////////////////////////////////////////////////////////////////
                //GENERAZIONE NUOVA STANZA QUANDO SI RAGGIUNGE L'ENTRATA
-        ////////////////////////////////////////////////////////////////////////////
-        if(p.getCollisionRect().intersects((room.entrance.getGlobalBounds())))
-        {
-           room.Pick_Room();
+        //////////////////////////////////////////////////////////////////////////*/
+
+        if (p.getCollisionRect().intersects((room.entrance.getGlobalBounds()))) {
+            room.Pick_Room();
         }
         window.display();
-
-
 
 
     }

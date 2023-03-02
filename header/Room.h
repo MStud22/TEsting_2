@@ -15,6 +15,7 @@ public:
     sf::RectangleShape entrance;
     sf::RectangleShape exit;
     std::vector<sf::RectangleShape> innerWalls;
+    std::vector<sf::RectangleShape> OuterWalls;
 
     Room(int width_, int height_);
 

@@ -11,30 +11,33 @@ public:
     float size_;
     sf::RectangleShape corpo_;
     string collisione;
-    sf::RectangleShape braccia_;
+    sf::RectangleShape bracciasx_;
+    sf::RectangleShape bracciadx_;
     sf::RectangleShape gambasx_;
     sf::RectangleShape gambadx_;
     sf::CircleShape testa_;
-    sf::RenderWindow& window_;
+    sf::RenderWindow &window_;
 
     Personaggio(float x, float y, float size, RenderWindow &window);
 
-    void disegna() ;
+    void disegna();
 
     void aggiornaPosizione();
+
     void Collision(string bordo);
+
     float getPositionx();
 
     float getPositiony();
 
-    void setPosition(float x_,float  y_);
+    void setPosition(float x_, float y_);
 
     FloatRect getCollisionRect() const;
 
+    string getCollisionDirection(const FloatRect &otherRect) const;
+
 private:
-    float x_, y_ ;
-
-
+    float x_, y_;
 
 
 };

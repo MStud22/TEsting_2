@@ -24,87 +24,15 @@ Room::Room(int width_, int height_) : width_(width_),height_(height_) {
     Room::left.setPosition(0.f, 0.f);
     Room::right.setPosition(width_ - 10.f, 0.f);
 
-
-
-
-
+    OuterWalls.push_back(top);
+    OuterWalls.push_back(bottom);
+    OuterWalls.push_back(left);
+    OuterWalls.push_back(right);
     //crea le pareti interne
     Pick_Room();
 }
 
-//GENERA IN MODO AUTOMATICO PARETI INTERNE VEROSIMILI
-void Room::generateInnerWalls() {
-    float wallWidth = 10.f;
-    float minWidth = 30.f;
 
-    // Generate walls along top and bottom edges
-    for (float x = wallWidth; x < width_ - minWidth; ) {
-        float w = static_cast<float>(rand() % static_cast<int>((width_ - x - minWidth) / 2) + minWidth);
-        float h = wallWidth * 2.f;
-        float y = static_cast<float>(rand() % static_cast<int>(height_ - h - wallWidth) + wallWidth);
-
-        sf::RectangleShape wall(sf::Vector2f(w, h));
-        wall.setPosition(x, y);
-        wall.setFillColor(sf::Color::White);
-        innerWalls.push_back(wall);
-
-        x += w + wallWidth;
-    }
-
-    // Generate walls along left and right edges
-    for (float y = wallWidth * 2.f; y < height_ - wallWidth * 2.f - minWidth; ) {
-        float w = wallWidth * 2.f;
-        float h = static_cast<float>(rand() % static_cast<int>((height_ - y - minWidth) / 2) + minWidth);
-        float x = static_cast<float>(rand() % static_cast<int>(width_ - w - wallWidth) + wallWidth);
-
-        sf::RectangleShape wall(sf::Vector2f(w, h));
-        wall.setPosition(x, y);
-        wall.setFillColor(sf::Color::White);
-        innerWalls.push_back(wall);
-
-        y += h + wallWidth;
-    }
-
-    // Generate walls between top and bottom edges
-    for (float x = wallWidth * 2.f; x < width_ - wallWidth * 2.f - minWidth; ) {
-        float w = static_cast<float>(rand() % static_cast<int>(width_ - x - wallWidth - minWidth) + minWidth);
-        float h = wallWidth;
-        float y;
-
-        if (rand() % 2 == 0) {
-            y = wallWidth;
-        } else {
-            y = height_ - wallWidth * 2.f;
-        }
-
-        sf::RectangleShape wall(sf::Vector2f(w, h));
-        wall.setPosition(x, y);
-        wall.setFillColor(sf::Color::White);
-        innerWalls.push_back(wall);
-
-        x += w + wallWidth;
-    }
-
-    // Generate walls between left and right edges
-    for (float y = wallWidth * 3.f; y < height_ - wallWidth * 3.f - minWidth; ) {
-        float w = wallWidth;
-        float h = static_cast<float>(rand() % static_cast<int>(height_ - y - wallWidth - minWidth) + minWidth);
-        float x;
-
-        if (rand() % 2 == 0) {
-            x = wallWidth;
-        } else {
-            x = width_ - wallWidth * 2.f;
-        }
-
-        sf::RectangleShape wall(sf::Vector2f(w, h));
-        wall.setPosition(x, y);
-        wall.setFillColor(sf::Color::White);
-        innerWalls.push_back(wall);
-
-        y += h + wallWidth;
-    }
-}
 
 void Room::Pick_Room() {
     //attraverso un random , scegli tra un numero pre impostato di stanze
