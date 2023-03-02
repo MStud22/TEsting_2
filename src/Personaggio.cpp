@@ -1,7 +1,7 @@
 //
 // Created by Marco on 23/02/2023.
 //
-
+#include <iostream>
 #include "../header/Personaggio.h"
 
 Personaggio::Personaggio(float x, float y, float size, RenderWindow& window) :
@@ -48,19 +48,24 @@ void Personaggio::disegna() {
 
 }
 
-void Personaggio::aggiornaPosizione()
-    {
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && Personaggio::collisione != "left") {
-            x_ -= size_ / 10.0f;
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && Personaggio::collisione != "right") {
-            x_ += size_ / 10.0f;
-        }
+//TODO rimuovi test colllisione
+//TODO FIXBUG Collision viene aggiornato inb modo diverso dalla hit box
+void Personaggio::aggiornaPosizione() {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && Personaggio::collisione != "left") {
+        x_ -= size_ / 10.0f;
+        std::cout << collisione << endl;
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && Personaggio::collisione != "right") {
+        x_ += size_ / 10.0f;
+        std::cout << collisione << endl;
+    }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && Personaggio::collisione != "top") {
             y_ -= size_ / 10.0f;
+            std::cout << collisione << endl;
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && Personaggio::collisione != "bottom") {
             y_ += size_ / 10.0f;
+            std::cout << collisione << endl;
         }
 
         // Aggiorna la posizione dei componenti del personaggio
@@ -68,15 +73,6 @@ void Personaggio::aggiornaPosizione()
 
     }
 
-    float Personaggio::getPositionx()
-    {
-        return corpo_.getPosition().x;
-}
-
-float Personaggio::getPositiony()
-{
-    return   corpo_.getPosition().y;
-}
 
 void Personaggio::setPosition(float x ,float y) {
     corpo_.setPosition(x, y - size_);
@@ -125,22 +121,25 @@ std::string Personaggio::getCollisionDirection(const sf::FloatRect &otherRect) c
     // Ottieni il rettangolo di collisione del personaggio
     sf::FloatRect collisionRect = getCollisionRect();
 
-    // Determina la posizione relativa dell'altro rettangolo rispetto al rettangolo di collisione del personaggio
-    float dx = otherRect.left - collisionRect.left;
-    float dy = otherRect.top - collisionRect.top;
-    float width = (otherRect.width + collisionRect.width) / 2;
-    float height = (otherRect.height + collisionRect.height) / 2;
-    float crossWidth = width * dy;
-    float crossHeight = height * dx;
-
     std::string direction = "";
 
-    // Determina la direzione della collisione in base alla posizione relativa dei rettangoli
-    if (abs(dx) <= width && abs(dy) <= height) {
-        if (crossWidth > crossHeight) {
-            direction = (crossWidth > -crossHeight) ? "bottom" : "left";
-        } else {
-            direction = (crossWidth > -crossHeight) ? "right" : "top";
+    // Controlla se i rettangoli di collisione si sovrappongono
+    if (collisionRect.intersects(otherRect)) {
+        // Determina la posizione relativa dell'altro rettangolo rispetto al rettangolo di collisione del personaggio
+        float dx = otherRect.left - collisionRect.left;
+        float dy = otherRect.top - collisionRect.top;
+        float width = (otherRect.width + collisionRect.width) / 2;
+        float height = (otherRect.height + collisionRect.height) / 2;
+        float crossWidth = width * dy;
+        float crossHeight = height * dx;
+
+        // Determina la direzione della collisione in base alla posizione relativa dei rettangoli
+        if (abs(dx) <= width && abs(dy) <= height) {
+            if (crossWidth > crossHeight) {
+                direction = (crossWidth > -crossHeight) ? "bottom" : "left";
+            } else {
+                direction = (crossWidth > -crossHeight) ? "right" : "top";
+            }
         }
     }
 
