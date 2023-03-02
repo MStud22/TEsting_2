@@ -81,18 +81,6 @@ void Engine::run()
         if (p.getCollisionRect().intersects((room.entrance.getGlobalBounds()))) {
             room.Pick_Room();
             p.setPosition(100, 200);
-
-
-            //TODO testing
-            std::cout << p.corpo_.getPosition().x << endl;
-            std::cout << p.x_ << endl;
-            sf::RectangleShape test;
-            test.setSize(p.corpo_.getSize());
-            test.setPosition(100, 200);
-            test.setFillColor(sf::Color::Magenta);
-            window.draw(test);
-            //TODO finish testing
-
         }
         window.display();
 
