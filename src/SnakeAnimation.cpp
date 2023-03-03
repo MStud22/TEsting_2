@@ -11,6 +11,7 @@ private:
     std::vector<RectangleShape> body;
     float speed;  // velocità del serpente (in pixel al secondo)
     float timeElapsed = 0;  // tempo trascorso dall'ultimo aggiornamento
+    bool finished = false;
 public:
     SnakeAnimation(sf::RenderWindow &window, int numRectangles, float speed) : window(window), speed(speed) {
         // impostazioni della testa del serpente
@@ -40,6 +41,7 @@ public:
 
             if (head.getPosition().x > window.getSize().x) {
                 head.setPosition(-head.getSize().x / 2.f, head.getPosition().y);
+                finished = true;
             }
 
             for (int i = 0; i < body.size(); i++) {
@@ -58,5 +60,10 @@ public:
 
             window.draw(body[i]);
         }
+    }
+
+    //"isFinished" che restituisce il valore del flag "finished"
+    bool isFinished() const {
+        return finished;
     }
 };

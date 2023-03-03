@@ -1,5 +1,6 @@
 
 #include <iostream>
+#include <mqoai.h>
 #include "../header/Engine.h"
 #include "../header/Personaggio.h"
 #include "../header/Room.h"
@@ -17,14 +18,16 @@ Engine::Engine()
 }
 
 void Engine::run() {
-    //TODO TEST ANIMATIO
-    Clock clock;
-    SnakeAnimation snake(window, 10, 5.0f);
-    float dt = clock.restart().asSeconds();
 
     //Main game loop , il gioco viene processato dalla classe engine
 
+    //animazione Switch /stanze
+    Clock clock;
+    SnakeAnimation snake(window, 10, 0.2f);
+    float dt = clock.restart().asSeconds();
+    bool AnimatingSnake = false;
 
+    //Personaggio
     Personaggio p(100, 200, 30, window);
     //stanza e variabili di appoggio per il suo funzionamento
     Room room(800, 400);
@@ -32,52 +35,51 @@ void Engine::run() {
 
     while (window.isOpen()) {
 
-        // window.clear();     //todo testing
-
-
-
-        /*
-        room.drawRoom(window);   //todo testing
-        p.disegna();
-         */
-
-        input();//prima di aggiornare lo scherma , controlla per gli input
-
-
-        /*////////////////////////////////////////////////////////////////////////////////////
-               CODICE PER LIMITARE IL MOVIMENTO
-          ///////////////////////////////////////////////////////////////////////////////////*/
-
-
-        if (p.getCollisionRect().intersects(room.top.getGlobalBounds())) {
-            p.Collision("top");
-        }
-        if (p.getCollisionRect().intersects(room.bottom.getGlobalBounds())) {
-            p.Collision("bottom");
-            p.corpo_.setFillColor(sf::Color::White);
-        }
-        if (p.getCollisionRect().intersects(room.left.getGlobalBounds())) {
-            p.Collision("left");
-        }
-        if (p.getCollisionRect().intersects(room.right.getGlobalBounds())) {
-            p.Collision("right");
-        }
-        if (p.getCollisionRect().intersects(room.top.getGlobalBounds()) ||
-            p.getCollisionRect().intersects(room.bottom.getGlobalBounds()) ||
-            p.getCollisionRect().intersects(room.left.getGlobalBounds()) ||
-            p.getCollisionRect().intersects(room.right.getGlobalBounds())) {
-            for (const auto &wall: room.OuterWalls) {
+        window.clear();     //todo testing
+        if (!AnimatingSnake) {
+            room.drawRoom(window);   //todo testing
+            p.disegna();
+            input();//prima di aggiornare lo scherma , controlla per gli input
+            /*////////////////////////////////////////////////////////////////////////////////////
+                   CODICE PER LIMITARE IL MOVIMENTO
+              ///////////////////////////////////////////////////////////////////////////////////*/
+            if (p.getCollisionRect().intersects(room.top.getGlobalBounds())) {
+                p.Collision("top");
+            }
+            if (p.getCollisionRect().intersects(room.bottom.getGlobalBounds())) {
+                p.Collision("bottom");
+                p.corpo_.setFillColor(sf::Color::White);
+            }
+            if (p.getCollisionRect().intersects(room.left.getGlobalBounds())) {
+                p.Collision("left");
+            }
+            if (p.getCollisionRect().intersects(room.right.getGlobalBounds())) {
+                p.Collision("right");
+            }
+            if (p.getCollisionRect().intersects(room.top.getGlobalBounds()) ||
+                p.getCollisionRect().intersects(room.bottom.getGlobalBounds()) ||
+                p.getCollisionRect().intersects(room.left.getGlobalBounds()) ||
+                p.getCollisionRect().intersects(room.right.getGlobalBounds())) {
+                for (const auto &wall: room.OuterWalls) {
+                    if (p.getCollisionRect().intersects(wall.getGlobalBounds())) {
+                        p.Collision(p.getCollisionDirection(wall.getGlobalBounds()));
+                    }
+                }
+            }
+            //codice per collisione con muri interni
+            for (const auto &wall: room.innerWalls) {
                 if (p.getCollisionRect().intersects(wall.getGlobalBounds())) {
                     p.Collision(p.getCollisionDirection(wall.getGlobalBounds()));
                 }
             }
-        }
-        //codice per collisione con muri interni
-        for (const auto &wall: room.innerWalls) {
-            if (p.getCollisionRect().intersects(wall.getGlobalBounds())) {
-                p.Collision(p.getCollisionDirection(wall.getGlobalBounds()));
+            if (p.getCollisionRect().intersects((room.entrance.getGlobalBounds()))) {
+                window.clear();
+                AnimatingSnake = true;
+
             }
+            window.display();
         }
+
 
 
 
@@ -87,23 +89,25 @@ void Engine::run() {
                //GENERAZIONE NUOVA STANZA QUANDO SI RAGGIUNGE L'ENTRATA
         //////////////////////////////////////////////////////////////////////////*/
 
-        if (p.getCollisionRect().intersects((room.entrance.getGlobalBounds()))) {
 
 
-            window.clear();
-            //TODO testing
+
+
+        /* ///////////////////////////////// ANIMAZIONE///////////////////////////////////////*/
+        while (AnimatingSnake) {
             snake.update(dt);
+            window.clear();
             snake.draw();
-            //todo fine testing
-            room.Pick_Room();
-            p.setPosition(100, 200);
+            if (snake.isFinished()) {
+                AnimatingSnake = false;
+                room.Pick_Room();
+                p.setPosition(100, 200);
+
+                break;
+            }
+            window.display();
         }
 
-        //TODO testing
-        snake.update(dt);
-        window.clear();
-        snake.draw();
-        window.display();
     }
 }
 
