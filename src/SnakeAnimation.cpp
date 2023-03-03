@@ -12,8 +12,11 @@ private:
     float speed;  // velocità del serpente (in pixel al secondo)
     float timeElapsed = 0;  // tempo trascorso dall'ultimo aggiornamento
     bool finished = false;
+    int numRectangles;
 public:
-    SnakeAnimation(sf::RenderWindow &window, int numRectangles, float speed) : window(window), speed(speed) {
+    SnakeAnimation(sf::RenderWindow &window, int numRectangles, float speed) : window(window),
+                                                                               numRectangles(numRectangles),
+                                                                               speed(speed) {
         // impostazioni della testa del serpente
         head.setFillColor(Color::Green);
         head.setSize(Vector2f(20, 20));
@@ -65,5 +68,19 @@ public:
     //"isFinished" che restituisce il valore del flag "finished"
     bool isFinished() const {
         return finished;
+    }
+
+    void Reset() {
+        timeElapsed = 0;
+        finished = false;
+        body.clear();
+        head.setOrigin(head.getSize() / 2.f);
+        head.setPosition(window.getSize().x / 2.f, window.getSize().y / 2.f);
+        // inizializzazione del corpo del serpente
+        for (int i = 0; i < numRectangles; i++) {
+            RectangleShape rect = head;
+            rect.setPosition(head.getPosition().x - i * head.getSize().x, head.getPosition().y);
+            body.push_back(rect);
+        }
     }
 };

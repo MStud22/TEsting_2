@@ -101,8 +101,8 @@ void Engine::run() {
             if (snake.isFinished()) {
                 AnimatingSnake = false;
                 room.Pick_Room();
+                snake.Reset();
                 p.setPosition(100, 200);
-
                 break;
             }
             window.display();
