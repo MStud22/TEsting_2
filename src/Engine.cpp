@@ -35,9 +35,9 @@ void Engine::run() {
 
     while (window.isOpen()) {
 
-        window.clear();     //todo testing
+        window.clear();
         if (!AnimatingSnake) {
-            room.drawRoom(window);   //todo testing
+            room.drawRoom(window);
             p.disegna();
             input();//prima di aggiornare lo scherma , controlla per gli input
             /*////////////////////////////////////////////////////////////////////////////////////
