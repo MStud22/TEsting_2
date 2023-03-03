@@ -19,7 +19,7 @@ Engine::Engine()
 void Engine::run() {
     //TODO TEST ANIMATIO
     Clock clock;
-    SnakeAnimation snake(window);
+    SnakeAnimation snake(window, 10, 5.0f);
     float dt = clock.restart().asSeconds();
 
     //Main game loop , il gioco viene processato dalla classe engine
@@ -30,14 +30,17 @@ void Engine::run() {
     Room room(800, 400);
 
 
-    while (window.isOpen())
-    {
+    while (window.isOpen()) {
 
-        window.clear();
+        // window.clear();     //todo testing
 
 
-        room.drawRoom(window);
+
+        /*
+        room.drawRoom(window);   //todo testing
         p.disegna();
+         */
+
         input();//prima di aggiornare lo scherma , controlla per gli input
 
 
@@ -86,21 +89,21 @@ void Engine::run() {
 
         if (p.getCollisionRect().intersects((room.entrance.getGlobalBounds()))) {
 
-            //TODO testing
+
             window.clear();
+            //TODO testing
             snake.update(dt);
             snake.draw();
-
-
-
             //todo fine testing
-
             room.Pick_Room();
             p.setPosition(100, 200);
         }
+
+        //TODO testing
+        snake.update(dt);
+        window.clear();
+        snake.draw();
         window.display();
-
-
     }
 }
 
