@@ -5,7 +5,7 @@ Menu::Menu(sf::RenderWindow &window) : window_(window) {};
 void Menu::draw(const std::vector<std::string> &menu_items) {
     window_.clear(sf::Color::Black);
     sf::Font font;
-    font.loadFromFile("../assets/spqri.ttf");
+    font.loadFromFile("../assets/Thor.ttf");
     sf::Text text;
     text.setFont(font);
     text.setCharacterSize(50);

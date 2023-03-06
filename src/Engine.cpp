@@ -27,6 +27,8 @@ void Engine::run() {
 
     Menu menu(window);
     std::vector<std::string> menu_items = {"Dungeon", "Adventure"};
+    bool visible = true;  // usiamo questa variabile booleana per controllare la visibilità del testo
+    //voglio che il nostro testo non lampeggi e sioa ben visibile all'occhio umano
 
     //animazione Switch / stanze
     Clock clock;
@@ -45,9 +47,16 @@ void Engine::run() {
 
 
         if (startMenu) {
-            menu.draw(menu_items);
+
+            if (clock.getElapsedTime().asSeconds() > 0.5f) // impostiamo un intervallo di 0,5 secondi
+            {
+                visible = !visible; // invertiamo la visibilità del testo
+                clock.restart(); // riavviamo l'orologio
+            }
+            if (visible)
+                menu.draw(menu_items);
             input();
-            window.display();
+
         }
 
 
@@ -112,7 +121,7 @@ void Engine::run() {
         //////////////////////////////////////////////////////////////////////////*/
 
         /* ///////////////////////////////// ANIMAZIONE///////////////////////////////////////*/
-        while (AnimatingSnake) {
+        while (AnimatingSnake && !startMenu) {
             snake.update(dt);
             window.clear();
             snake.draw();
