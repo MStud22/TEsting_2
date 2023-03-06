@@ -23,6 +23,7 @@ public:
     RenderWindow window;
     void input();
 
+    bool startMenu = true;
 
     //abbiamo bisogno di un main loop per effettture il run
     void run();

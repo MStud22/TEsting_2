@@ -17,6 +17,13 @@ void Engine::input() {
                 window.close();
             }
         }
+        if (startMenu) {
+            if (event.type == Event::KeyPressed) {
+                if (Keyboard::isKeyPressed((Keyboard::Enter))) {
+                    startMenu = false;
+                }
+            }
+        }
 
 
     }

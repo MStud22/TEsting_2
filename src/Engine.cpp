@@ -4,6 +4,7 @@
 #include "../header/Engine.h"
 #include "../header/Personaggio.h"
 #include "../header/Room.h"
+#include "../header/Menu.h"
 #include "SnakeAnimation.cpp"
 
 
@@ -21,7 +22,13 @@ void Engine::run() {
 
     //Main game loop , il gioco viene processato dalla classe engine
 
-    //animazione Switch /stanze
+
+    //implementazione menu
+
+    Menu menu(window);
+    std::vector<std::string> menu_items = {"Dungeon", "Adventure"};
+
+    //animazione Switch / stanze
     Clock clock;
     SnakeAnimation snake(window, 10, 0.2f);
     float dt = clock.restart().asSeconds();
@@ -29,17 +36,32 @@ void Engine::run() {
 
     //Personaggio
     Personaggio p(100, 200, 30, window);
+
     //stanza e variabili di appoggio per il suo funzionamento
     Room room(800, 400);
 
 
     while (window.isOpen()) {
 
-        window.clear();
-        if (!AnimatingSnake) {
+
+        if (startMenu) {
+            menu.draw(menu_items);
+            input();
+            window.display();
+        }
+
+
+
+
+        /*controlla se il gioco sta effettuando una animazione o una cinematica */
+
+        if (!AnimatingSnake && !startMenu) {
+            window.clear();
             room.drawRoom(window);
             p.disegna();
+
             input();//prima di aggiornare lo scherma , controlla per gli input
+
             /*////////////////////////////////////////////////////////////////////////////////////
                    CODICE PER LIMITARE IL MOVIMENTO
               ///////////////////////////////////////////////////////////////////////////////////*/
@@ -88,10 +110,6 @@ void Engine::run() {
         /*///////////////////////////////////////////////////////////////////////////
                //GENERAZIONE NUOVA STANZA QUANDO SI RAGGIUNGE L'ENTRATA
         //////////////////////////////////////////////////////////////////////////*/
-
-
-
-
 
         /* ///////////////////////////////// ANIMAZIONE///////////////////////////////////////*/
         while (AnimatingSnake) {
