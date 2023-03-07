@@ -14,6 +14,15 @@ Room::Room(int width_, int height_) : width_(width_),height_(height_) {
     Room::left.setSize(sf::Vector2f(10.f, height_));
     Room::right.setSize(sf::Vector2f(10.f, height_));
 
+    //imposta tetxture
+    texture.loadFromFile("../assets/wall.png");
+    //carica texture sui muri
+    Room::top.setTexture(&texture);
+    Room::top.setTextureRect(sf::IntRect(0, 0, 20, 30));
+    Room::bottom.setTexture(&texture);
+    Room::left.setTexture(&texture);
+    Room::right.setTexture(&texture);
+
     Room::top.setFillColor(sf::Color::White);
     Room::bottom.setFillColor(sf::Color::White);
     Room::left.setFillColor(sf::Color::White);
@@ -97,9 +106,13 @@ void Room::genera_FANGS() {
     CenterCube.setPosition(width_ / 2 - wallWidth * 2, (height_ / 3));
     innerWalls.push_back(CenterCube);
 
+
+
+
     //rende tutti i muri  su Innerwalls bianchi
     for (auto &wall: innerWalls) {
         wall.setFillColor(sf::Color::White);
+        wall.setTexture(&texture);
     }
 
     // Crea l'ingresso e l'uscita
@@ -137,6 +150,7 @@ void Room::genera_ZIGZAG() {
     //rende tutti i muri  su Innerwalls bianchi
     for (auto &wall: innerWalls) {
         wall.setFillColor(sf::Color::White);
+        wall.setTexture(&texture);
     }
 
     // Crea l'ingresso e l'uscita
@@ -169,6 +183,8 @@ void Room::genera_LONGCORRIDOR() {
     //rende tutti i muri  su Innerwalls bianchi
     for (auto &wall: innerWalls) {
         wall.setFillColor(sf::Color::White);
+        wall.setTexture(&texture);
+
     }
 
     // Crea l'ingresso e l'uscita

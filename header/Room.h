@@ -32,7 +32,7 @@ public:
     void genera_LONGCORRIDOR();
 
 private:
-
+    sf::Texture texture;
 
     void generateInnerWalls();
 };
