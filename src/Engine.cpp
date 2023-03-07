@@ -4,6 +4,7 @@
 #include "../header/Engine.h"
 #include "../header/Personaggio.h"
 #include "../header/Room.h"
+#include "../header/Menu.h"
 #include "SnakeAnimation.cpp"
 
 
@@ -21,7 +22,15 @@ void Engine::run() {
 
     //Main game loop , il gioco viene processato dalla classe engine
 
-    //animazione Switch /stanze
+
+    //implementazione menu
+
+    Menu menu(window);
+    std::vector<std::string> menu_items = {"Dungeon", "Adventure"};
+    bool visible = true;  // usiamo questa variabile booleana per controllare la visibilità del testo
+    //voglio che il nostro testo non lampeggi e sioa ben visibile all'occhio umano
+
+    //animazione Switch / stanze
     Clock clock;
     SnakeAnimation snake(window, 10, 0.2f);
     float dt = clock.restart().asSeconds();
@@ -29,17 +38,39 @@ void Engine::run() {
 
     //Personaggio
     Personaggio p(100, 200, 30, window);
+
     //stanza e variabili di appoggio per il suo funzionamento
     Room room(800, 400);
 
 
     while (window.isOpen()) {
 
-        window.clear();
-        if (!AnimatingSnake) {
+
+        if (startMenu) {
+
+            if (clock.getElapsedTime().asSeconds() > 0.5f) // impostiamo un intervallo di 0,5 secondi
+            {
+                visible = !visible; // invertiamo la visibilità del testo
+                clock.restart(); // riavviamo l'orologio
+            }
+            if (visible)
+                menu.draw();
+            input();
+
+        }
+
+
+
+
+        /*controlla se il gioco sta effettuando una animazione o una cinematica */
+
+        if (!AnimatingSnake && !startMenu) {
+            window.clear();
             room.drawRoom(window);
             p.disegna();
+
             input();//prima di aggiornare lo scherma , controlla per gli input
+
             /*////////////////////////////////////////////////////////////////////////////////////
                    CODICE PER LIMITARE IL MOVIMENTO
               ///////////////////////////////////////////////////////////////////////////////////*/
@@ -89,12 +120,8 @@ void Engine::run() {
                //GENERAZIONE NUOVA STANZA QUANDO SI RAGGIUNGE L'ENTRATA
         //////////////////////////////////////////////////////////////////////////*/
 
-
-
-
-
         /* ///////////////////////////////// ANIMAZIONE///////////////////////////////////////*/
-        while (AnimatingSnake) {
+        while (AnimatingSnake && !startMenu) {
             snake.update(dt);
             window.clear();
             snake.draw();
