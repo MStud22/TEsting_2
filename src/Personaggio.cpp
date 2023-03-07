@@ -10,12 +10,12 @@ Personaggio::Personaggio(float x, float y, float size, RenderWindow& window) :
 
 
     // Imposta i colori dei componenti dello stickman
-    corpo_.setFillColor(sf::Color::White);
-    bracciadx_.setFillColor(sf::Color::White);
-    bracciasx_.setFillColor(sf::Color::White);
-    gambadx_.setFillColor(sf::Color::White);
-    gambasx_.setFillColor(sf::Color::White);
-    testa_.setFillColor(sf::Color::White);
+    corpo_.setFillColor(sf::Color::Black);
+    bracciadx_.setFillColor(sf::Color::Black);
+    bracciasx_.setFillColor(sf::Color::Black);
+    gambadx_.setFillColor(sf::Color::Black);
+    gambasx_.setFillColor(sf::Color::Black);
+    testa_.setFillColor(sf::Color::Black);
 
     // Imposta le dimensioni dei componenti dello stickman
     corpo_.setSize(sf::Vector2f(size_ / 2, size_));
@@ -27,6 +27,11 @@ Personaggio::Personaggio(float x, float y, float size, RenderWindow& window) :
     // Imposta le dimensioni e il colore della testa
     testa_.setRadius(size_ / 4.5);
 
+    //imposta sprite immaggine
+    texture.loadFromFile("../assets/timmy3.png");
+    sprite.setTexture(texture);
+    sprite.setScale(3.7, 3.7);
+    sprite.setPosition(x_ - 40, y_ - 40);
 
     setPosition(x_, y_);
 
@@ -37,12 +42,14 @@ void Personaggio::disegna() {
 
 
     aggiornaPosizione();
+    sprite.setPosition(x_ - 58, y_ - 60); //aggiusta la immagine per entrare nei limiti personaggio
     window_.draw(corpo_);
     window_.draw(bracciadx_);
     window_.draw(bracciasx_);
     window_.draw(gambadx_);
     window_.draw(gambasx_);
     window_.draw(testa_);
+    window_.draw(sprite);
 
 
 }

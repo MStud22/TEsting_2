@@ -38,7 +38,8 @@ public:
     string getCollisionDirection(const FloatRect &otherRect) const;
 
 private:
-
+    Texture texture;
+    Sprite sprite;
 
 };
 
