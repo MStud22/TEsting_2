@@ -3,6 +3,8 @@
 #include <SFML/Graphics.hpp>
 #include <string>
 
+using namespace std;
+
 #ifndef TESTING_2_MENU_H
 #define TESTING_2_MENU_H
 
@@ -12,9 +14,12 @@ public:
 
     Menu(sf::RenderWindow &window);
 
-    void draw(const std::vector<std::string> &menu_items);
+    void draw();
 
 private:
+    string Title = "Dungeon Adventure";
+    string Start = "Start";
+
     sf::RenderWindow &window_;
 };
 

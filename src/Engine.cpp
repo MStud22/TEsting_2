@@ -54,7 +54,7 @@ void Engine::run() {
                 clock.restart(); // riavviamo l'orologio
             }
             if (visible)
-                menu.draw(menu_items);
+                menu.draw();
             input();
 
         }
