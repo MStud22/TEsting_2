@@ -23,6 +23,8 @@ public:
 
     void disegna();
 
+    void Animate_steady(); //TODO FIX AND CREATE(GPT)
+
     void aggiornaPosizione();
 
     void Collision(string bordo);
@@ -40,7 +42,13 @@ public:
 private:
     Texture texture;
     Sprite sprite;
+    bool steady = true;
 
+    //conteggio frame per animazione
+    clock_t start_time, end_time;
+    int frame_count = 0;
+    const int FPS = 60; // frames per second
+    const int FRAME_DELAY = 1000 / FPS; // delay tra i frame (in millisecondi)
 };
 
 

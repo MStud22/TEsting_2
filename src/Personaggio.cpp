@@ -43,6 +43,9 @@ void Personaggio::disegna() {
 
     aggiornaPosizione();
     sprite.setPosition(x_ - 40, y_ - 55); //aggiusta la immagine per entrare nei limiti personaggio
+    if (steady) {
+
+    }
     window_.draw(corpo_);
     window_.draw(bracciadx_);
     window_.draw(bracciasx_);
@@ -59,19 +62,18 @@ void Personaggio::aggiornaPosizione() {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && Personaggio::collisione != "left") {
         x_ -= size_ / 10.0f;
         std::cout << collisione << endl;
-    }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && Personaggio::collisione != "right") {
+    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && Personaggio::collisione != "right") {
         x_ += size_ / 10.0f;
         std::cout << collisione << endl;
+    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && Personaggio::collisione != "top") {
+        y_ -= size_ / 10.0f;
+        std::cout << collisione << endl;
+    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && Personaggio::collisione != "bottom") {
+        y_ += size_ / 10.0f;
+        std::cout << collisione << endl;
+    } else {
+        steady = true;
     }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && Personaggio::collisione != "top") {
-            y_ -= size_ / 10.0f;
-            std::cout << collisione << endl;
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && Personaggio::collisione != "bottom") {
-            y_ += size_ / 10.0f;
-            std::cout << collisione << endl;
-        }
     Personaggio::collisione = "";
         // Aggiorna la posizione dei componenti del personaggio
         setPosition(x_,y_);
