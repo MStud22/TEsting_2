@@ -79,7 +79,6 @@ void Engine::run() {
             }
             if (p.getCollisionRect().intersects(room.bottom.getGlobalBounds())) {
                 p.Collision("bottom");
-                p.corpo_.setFillColor(sf::Color::White);
             }
             if (p.getCollisionRect().intersects(room.left.getGlobalBounds())) {
                 p.Collision("left");
