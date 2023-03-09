@@ -32,6 +32,9 @@ Personaggio::Personaggio(float x, float y, float size, RenderWindow& window) :
     sprite.setTexture(texture);
     sprite.setScale(2.7, 3);
 
+    //setta il clock per animazione
+    last_time = clock();
+
 
     setPosition(x_, y_);
 
@@ -43,8 +46,15 @@ void Personaggio::disegna() {
 
     aggiornaPosizione();
     sprite.setPosition(x_ - 40, y_ - 55); //aggiusta la immagine per entrare nei limiti personaggio
-    if (steady) {
+    if (steady) {           //controlla lo stato del personaggio
+        if (Frame_counter() % 30 ==
+            0)        //controlla che siano passati due frame dall'ultima chiamata, (draw viene chiamato constantemente)
+        {
 
+            std::cout << Frame_counter() << endl; //TODO remove testing
+            //TODO fix velocità animazione
+            Steady_Animate();
+        }
     }
     window_.draw(corpo_);
     window_.draw(bracciadx_);
@@ -145,6 +155,17 @@ std::string Personaggio::getCollisionDirection(const sf::FloatRect &rect) const 
     }
 }
 
+int Personaggio::Frame_counter() {
+    clock_t current_time = clock();
+    int elapsed_time = (current_time - last_time) / (CLOCKS_PER_SEC / 1000);
+    if (elapsed_time >= 1000) { // se è passato un secondo
+        last_time = current_time;
+        fps = frame_count;
+        frame_count = 0;
+    }
+    frame_count++;
+    return fps;
+}
 
 
 void Personaggio::Collision(string bordo) {
@@ -162,3 +183,23 @@ void Personaggio::Collision(string bordo) {
     }
 
 }
+
+void Personaggio::Steady_Animate() {
+    if (swap_frame == 0) {
+        texture.loadFromFile("../assets/knight.png");
+        sprite.setTexture(texture);
+        sprite.setScale(2.7, 3);
+        swap_frame = 1;
+        std::cout << "anim1" << endl;
+    } else if (swap_frame == 1) {
+        texture.loadFromFile("../assets/knight2.png");
+        sprite.setTexture(texture);
+        sprite.setScale(2.7, 3);
+        swap_frame = 0;
+        std::cout << "anim2" << endl;
+    }
+    std::cout << swap_frame << endl;
+
+}
+
+

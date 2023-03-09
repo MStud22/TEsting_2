@@ -19,11 +19,14 @@ public:
     sf::RenderWindow &window_;
     float x_, y_;
 
+
     Personaggio(float x, float y, float size, RenderWindow &window);
 
     void disegna();
 
-    void Animate_steady(); //TODO FIX AND CREATE(GPT)
+    int Frame_counter();
+
+    void Steady_Animate();
 
     void aggiornaPosizione();
 
@@ -44,11 +47,15 @@ private:
     Sprite sprite;
     bool steady = true;
 
-    //conteggio frame per animazione
-    clock_t start_time, end_time;
+    //variabili per il caount dei frame
+    clock_t last_time;
+    int fps;
     int frame_count = 0;
-    const int FPS = 60; // frames per second
-    const int FRAME_DELAY = 1000 / FPS; // delay tra i frame (in millisecondi)
+
+    //variabile per animazione
+    int swap_frame = 0;
+
+
 };
 
 
