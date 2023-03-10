@@ -168,17 +168,16 @@ void Personaggio::Collision(string bordo) {
 
 void Personaggio::Steady_Animate() {
     if (swap_frame == 0) {
-        texture.loadFromFile("../assets/knight.png");
+        texture.loadFromFile("../assets/Knight_animation/knight.png");
         sprite.setTexture(texture);
         sprite.setScale(2.7, 3);
         swap_frame = 1;
-        std::cout << "anim1" << endl;
     } else if (swap_frame == 1) {
-        texture.loadFromFile("../assets/knight2.png");
+        texture.loadFromFile("../assets/Knight_animation/knight2.png");
         sprite.setTexture(texture);
         sprite.setScale(2.7, 3);
         swap_frame = 0;
-        std::cout << "anim2" << endl;
+
     }
     std::cout << swap_frame << endl;
 

@@ -139,7 +139,7 @@ void Engine::run() {
         }
 
         frames = getElapsedFrames();
-        cout << frames << endl;
+
     }
 }
 
