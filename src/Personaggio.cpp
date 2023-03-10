@@ -179,7 +179,6 @@ void Personaggio::Steady_Animate() {
         swap_frame = 0;
 
     }
-    std::cout << swap_frame << endl;
 
 }
 

@@ -6,7 +6,7 @@
 #define TESTING_2_VERSION_H
 #include <string>
 
-static const std::string VERSION = "1.4.2";
+static const std::string VERSION = "1.5";
 
 #endif //TESTING_2_VERSION_H
 
