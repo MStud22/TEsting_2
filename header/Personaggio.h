@@ -19,9 +19,13 @@ public:
     sf::RenderWindow &window_;
     float x_, y_;
 
+
     Personaggio(float x, float y, float size, RenderWindow &window);
 
     void disegna();
+
+
+    void Steady_Animate();
 
     void aggiornaPosizione();
 
@@ -38,6 +42,13 @@ public:
     string getCollisionDirection(const FloatRect &otherRect) const;
 
 private:
+    Texture texture;
+    Sprite sprite;
+    bool steady = true;
+
+
+    //variabile per animazione
+    int swap_frame = 0;
 
 
 };

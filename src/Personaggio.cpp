@@ -7,15 +7,15 @@
 Personaggio::Personaggio(float x, float y, float size, RenderWindow& window) :
         x_(x), y_(y), size_(size), window_(window)
 {
-
-
+    //colore rappresentativo personaggio
+    sf::Color color_personaggio(sf::Color::Black);
     // Imposta i colori dei componenti dello stickman
-    corpo_.setFillColor(sf::Color::White);
-    bracciadx_.setFillColor(sf::Color::White);
-    bracciasx_.setFillColor(sf::Color::White);
-    gambadx_.setFillColor(sf::Color::White);
-    gambasx_.setFillColor(sf::Color::White);
-    testa_.setFillColor(sf::Color::White);
+    corpo_.setFillColor(color_personaggio);
+    bracciadx_.setFillColor(color_personaggio);
+    bracciasx_.setFillColor(color_personaggio);
+    gambadx_.setFillColor(color_personaggio);
+    gambasx_.setFillColor(color_personaggio);
+    testa_.setFillColor(color_personaggio);
 
     // Imposta le dimensioni dei componenti dello stickman
     corpo_.setSize(sf::Vector2f(size_ / 2, size_));
@@ -27,6 +27,13 @@ Personaggio::Personaggio(float x, float y, float size, RenderWindow& window) :
     // Imposta le dimensioni e il colore della testa
     testa_.setRadius(size_ / 4.5);
 
+    //imposta sprite immaggine
+    texture.loadFromFile("../assets/knight.png");
+    sprite.setTexture(texture);
+    sprite.setScale(2.7, 3);
+
+
+
 
     setPosition(x_, y_);
 
@@ -37,12 +44,19 @@ void Personaggio::disegna() {
 
 
     aggiornaPosizione();
+    sprite.setPosition(x_ - 40, y_ - 55); //aggiusta la immagine per entrare nei limiti personaggio
+    if (steady) {
+        if (Engine::getElapsedFrames() % 30 == 0) {
+            Steady_Animate();
+        }
+    }
     window_.draw(corpo_);
     window_.draw(bracciadx_);
     window_.draw(bracciasx_);
     window_.draw(gambadx_);
     window_.draw(gambasx_);
     window_.draw(testa_);
+    window_.draw(sprite);
 
 
 }
@@ -52,19 +66,18 @@ void Personaggio::aggiornaPosizione() {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && Personaggio::collisione != "left") {
         x_ -= size_ / 10.0f;
         std::cout << collisione << endl;
-    }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && Personaggio::collisione != "right") {
+    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && Personaggio::collisione != "right") {
         x_ += size_ / 10.0f;
         std::cout << collisione << endl;
+    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && Personaggio::collisione != "top") {
+        y_ -= size_ / 10.0f;
+        std::cout << collisione << endl;
+    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && Personaggio::collisione != "bottom") {
+        y_ += size_ / 10.0f;
+        std::cout << collisione << endl;
+    } else {
+        steady = true;
     }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && Personaggio::collisione != "top") {
-            y_ -= size_ / 10.0f;
-            std::cout << collisione << endl;
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && Personaggio::collisione != "bottom") {
-            y_ += size_ / 10.0f;
-            std::cout << collisione << endl;
-        }
     Personaggio::collisione = "";
         // Aggiorna la posizione dei componenti del personaggio
         setPosition(x_,y_);
@@ -137,7 +150,6 @@ std::string Personaggio::getCollisionDirection(const sf::FloatRect &rect) const 
 }
 
 
-
 void Personaggio::Collision(string bordo) {
     if (bordo == "top") {
         Personaggio::collisione = "top";
@@ -153,3 +165,22 @@ void Personaggio::Collision(string bordo) {
     }
 
 }
+
+void Personaggio::Steady_Animate() {
+    if (swap_frame == 0) {
+        texture.loadFromFile("../assets/Knight_animation/knight.png");
+        sprite.setTexture(texture);
+        sprite.setScale(2.7, 3);
+        swap_frame = 1;
+    } else if (swap_frame == 1) {
+        texture.loadFromFile("../assets/Knight_animation/knight2.png");
+        sprite.setTexture(texture);
+        sprite.setScale(2.7, 3);
+        swap_frame = 0;
+
+    }
+    std::cout << swap_frame << endl;
+
+}
+
+
