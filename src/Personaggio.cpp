@@ -32,8 +32,7 @@ Personaggio::Personaggio(float x, float y, float size, RenderWindow& window) :
     sprite.setTexture(texture);
     sprite.setScale(2.7, 3);
 
-    //setta il clock per animazione
-    last_time = clock();
+
 
 
     setPosition(x_, y_);
@@ -46,13 +45,8 @@ void Personaggio::disegna() {
 
     aggiornaPosizione();
     sprite.setPosition(x_ - 40, y_ - 55); //aggiusta la immagine per entrare nei limiti personaggio
-    if (steady) {           //controlla lo stato del personaggio
-        if (Frame_counter() % 30 ==
-            0)        //controlla che siano passati due frame dall'ultima chiamata, (draw viene chiamato constantemente)
-        {
-
-            std::cout << Frame_counter() << endl; //TODO remove testing
-            //TODO fix velocità animazione
+    if (steady) {
+        if (Engine::getElapsedFrames() % 30 == 0) {
             Steady_Animate();
         }
     }
@@ -153,18 +147,6 @@ std::string Personaggio::getCollisionDirection(const sf::FloatRect &rect) const 
     } else {
         return "";
     }
-}
-
-int Personaggio::Frame_counter() {
-    clock_t current_time = clock();
-    int elapsed_time = (current_time - last_time) / (CLOCKS_PER_SEC / 1000);
-    if (elapsed_time >= 1000) { // se è passato un secondo
-        last_time = current_time;
-        fps = frame_count;
-        frame_count = 0;
-    }
-    frame_count++;
-    return fps;
 }
 
 

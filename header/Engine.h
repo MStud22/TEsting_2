@@ -6,6 +6,7 @@
 #include <SFML/Graphics/RectangleShape.hpp>
 
 
+
 using namespace sf; //abbreviazione di sfml class per richimare la libreria piu veloemente (non bisogna scriverla)
 using namespace std; //stessa cosa
 class Engine {
@@ -21,13 +22,17 @@ public:
     Engine();
 
     RenderWindow window;
+
     void input();
+
+    static int getElapsedFrames();
 
     bool startMenu = true;
 
     //abbiamo bisogno di un main loop per effettture il run
     void run();
 
+    int frames;
 };
 
 

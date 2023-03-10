@@ -2,6 +2,7 @@
 #include <iostream>
 #include <mqoai.h>
 #include "../header/Engine.h"
+
 #include "../header/Personaggio.h"
 #include "../header/Room.h"
 #include "../header/Menu.h"
@@ -16,6 +17,7 @@ Engine::Engine()
     window.create(VideoMode(resolution.x,resolution.y),"Test",Style::Default);  //creazione finestra,risoluzione,nome,stile
     window.setFramerateLimit(FPS);
 
+
 }
 
 void Engine::run() {
@@ -24,7 +26,6 @@ void Engine::run() {
 
 
     //implementazione menu
-
     Menu menu(window);
     std::vector<std::string> menu_items = {"Dungeon", "Adventure"};
     bool visible = true;  // usiamo questa variabile booleana per controllare la visibilità del testo
@@ -41,6 +42,7 @@ void Engine::run() {
 
     //stanza e variabili di appoggio per il suo funzionamento
     Room room(800, 400);
+
 
 
     while (window.isOpen()) {
@@ -69,7 +71,9 @@ void Engine::run() {
             room.drawRoom(window);
             p.disegna();
 
-            input();//prima di aggiornare lo scherma , controlla per gli input
+            input();//prima di aggiornare lo schermo , controlla per gli input
+
+
 
             /*////////////////////////////////////////////////////////////////////////////////////
                    CODICE PER LIMITARE IL MOVIMENTO
@@ -134,8 +138,9 @@ void Engine::run() {
             window.display();
         }
 
+        frames = getElapsedFrames();
+        cout << frames << endl;
     }
 }
-
 
 

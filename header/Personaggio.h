@@ -24,7 +24,6 @@ public:
 
     void disegna();
 
-    int Frame_counter();
 
     void Steady_Animate();
 
@@ -47,10 +46,6 @@ private:
     Sprite sprite;
     bool steady = true;
 
-    //variabili per il caount dei frame
-    clock_t last_time;
-    int fps;
-    int frame_count = 0;
 
     //variabile per animazione
     int swap_frame = 0;
