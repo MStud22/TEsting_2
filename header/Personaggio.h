@@ -47,7 +47,10 @@ private:
     Texture texture;
     Sprite sprite;
     bool steady = true;
-    bool camminata_dx = false;
+    string moving;
+
+    //variabile movimento
+    bool key_pressed;
 
 
     //variabile per animazione
