@@ -45,11 +45,25 @@ void Personaggio::disegna() {
 
     aggiornaPosizione();
     sprite.setPosition(x_ - 40, y_ - 55); //aggiusta la immagine per entrare nei limiti personaggio
+
+    //aggioramenti animazioni
+
+    //TODO rimuovi testing
+    /*
     if (steady) {
         if (Engine::getElapsedFrames() % 30 == 0) {
+
             Steady_Animate();
         }
     }
+    */
+    if (steady) {
+        if (Engine::getElapsedFrames() % 30 == 0) {
+            Camminata_SX();
+            cout << "animating camminata in if" << endl;
+        }
+    }
+
     window_.draw(corpo_);
     window_.draw(bracciadx_);
     window_.draw(bracciasx_);
@@ -63,26 +77,36 @@ void Personaggio::disegna() {
 
 
 void Personaggio::aggiornaPosizione() {
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && Personaggio::collisione != "left") {
-        x_ -= size_ / 10.0f;
-        std::cout << collisione << endl;
-    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && Personaggio::collisione != "right") {
-        x_ += size_ / 10.0f;
-        std::cout << collisione << endl;
-    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && Personaggio::collisione != "top") {
-        y_ -= size_ / 10.0f;
-        std::cout << collisione << endl;
-    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && Personaggio::collisione != "bottom") {
-        y_ += size_ / 10.0f;
-        std::cout << collisione << endl;
+    Event event{};
+
+    window_.pollEvent(event);
+    if (event.type == event.KeyPressed) {
+        steady = false;
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && Personaggio::collisione != "left") {
+            x_ -= size_ / 10.0f;
+
+
+        } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && Personaggio::collisione != "right") {
+            x_ += size_ / 10.0f;
+            camminata_dx = true;
+            cout << "camiinata dx" << endl; //TODO rimuovi test
+
+        } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && Personaggio::collisione != "top") {
+            y_ -= size_ / 10.0f;
+
+        } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && Personaggio::collisione != "bottom") {
+            y_ += size_ / 10.0f;
+
+        }
     } else {
         steady = true;
+        camminata_dx = false;
     }
     Personaggio::collisione = "";
-        // Aggiorna la posizione dei componenti del personaggio
-        setPosition(x_,y_);
+    // Aggiorna la posizione dei componenti del personaggio
+    setPosition(x_, y_);
 
-    }
+}
 
 
 void Personaggio::setPosition(float x ,float y) {
@@ -179,7 +203,47 @@ void Personaggio::Steady_Animate() {
         swap_frame = 0;
 
     }
+    cout << "animating" << endl;
+}
 
+void Personaggio::Camminata_SX() {
+    if (swap_frame_camminata == 0) {
+        texture.loadFromFile("../assets/animazione_camminatadx/knight_sx_1.png");
+        sprite.setTexture(texture);
+        sprite.setScale(2.7, 3);
+        swap_frame = 1;
+    } else if (swap_frame == 1) {
+        texture.loadFromFile("../assets/animazione_camminatadx/knight_sx_2.png");
+        sprite.setTexture(texture);
+        sprite.setScale(2.7, 3);
+        swap_frame = 2;
+    } else if (swap_frame == 2) {
+        texture.loadFromFile("../assets/animazione_camminatadx/knight_sx_3.png");
+        sprite.setTexture(texture);
+        sprite.setScale(2.7, 3);
+        swap_frame = 3;
+    } else if (swap_frame == 3) {
+        texture.loadFromFile("../assets/animazione_camminatadx/knight_sx_4.png");
+        sprite.setTexture(texture);
+        sprite.setScale(2.7, 3);
+        swap_frame = 4;
+    } else if (swap_frame == 4) {
+        texture.loadFromFile("../assets/animazione_camminatadx/knight_sx_5.png");
+        sprite.setTexture(texture);
+        sprite.setScale(2.7, 3);
+        swap_frame = 5;
+    } else if (swap_frame == 5) {
+        texture.loadFromFile("../assets/animazione_camminatadx/knight_sx_6.png");
+        sprite.setTexture(texture);
+        sprite.setScale(2.7, 3);
+        swap_frame = 6;
+    } else if (swap_frame == 6) {
+        texture.loadFromFile("../assets/animazione_camminatadx/knight_sx_7.png");
+        sprite.setTexture(texture);
+        sprite.setScale(2.7, 3);
+        swap_frame = 0;
+    }
+    cout << "animating camminata" << endl;
 }
 
 
