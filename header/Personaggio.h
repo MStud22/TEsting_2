@@ -27,6 +27,8 @@ public:
 
     void Steady_Animate();
 
+    void Camminata_DX();
+
     void Camminata_SX();
 
     void aggiornaPosizione();

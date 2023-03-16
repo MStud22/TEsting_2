@@ -59,10 +59,15 @@ void Personaggio::disegna() {
 
     if (moving == "dx") {
         if (Engine::getElapsedFrames() % 6 == 0) {
-            Camminata_SX();
-            cout << "animating camminata in if" << endl;
+            Camminata_DX();
         }
     }
+    if (moving == "sx") {
+        if (Engine::getElapsedFrames() % 6 == 0) {
+            Camminata_SX();
+        }
+    }
+
 
     window_.draw(corpo_);
     window_.draw(bracciadx_);
@@ -109,6 +114,7 @@ void Personaggio::aggiornaPosizione() {
     } else if (!key_pressed) {
         steady = true;
         moving = "";
+        swap_frame_camminata = 0;
     }
     cout << key_pressed << endl;
     cout << moving << endl;
@@ -217,7 +223,7 @@ void Personaggio::Steady_Animate() {
     cout << "animating" << endl;
 }
 
-void Personaggio::Camminata_SX() {
+void Personaggio::Camminata_DX() {
     if (swap_frame_camminata == 0) {
         texture.loadFromFile("../assets/animazione_camminatadx/knight_sx_1.png");
         sprite.setTexture(texture);
@@ -254,8 +260,6 @@ void Personaggio::Camminata_SX() {
         sprite.setScale(2.7, 3);
         swap_frame_camminata = 0;
     }
-    cout << swap_frame << endl;
-    cout << "animating camminata" << endl;
 }
 
-
+//TODO implementa camminata a sinistra ( copia a destra )
