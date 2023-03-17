@@ -31,6 +31,8 @@ public:
 
     void Camminata_SX();
 
+    void Camminata_UP();
+
     void aggiornaPosizione();
 
     void Collision(string bordo);

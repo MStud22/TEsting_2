@@ -62,12 +62,17 @@ void Personaggio::disegna() {
             Camminata_DX();
         }
     }
+
     if (moving == "sx") {
         if (Engine::getElapsedFrames() % 6 == 0) {
             Camminata_SX();
         }
     }
 
+    if (moving == "up")
+        if (Engine::getElapsedFrames() % 12 == 0) {
+            Camminata_UP();
+        }
 
     window_.draw(corpo_);
     window_.draw(bracciadx_);
@@ -262,4 +267,87 @@ void Personaggio::Camminata_DX() {
     }
 }
 
-//TODO implementa camminata a sinistra ( copia a destra )
+
+void Personaggio::Camminata_SX() {
+    if (swap_frame_camminata == 0) {
+        texture.loadFromFile("../assets/animazione_camminatasx/knightSX-1.png");
+        sprite.setTexture(texture);
+        sprite.setScale(2.7, 3);
+        swap_frame_camminata = 1;
+    } else if (swap_frame_camminata == 1) {
+        texture.loadFromFile("../assets/animazione_camminatasx/knightSX-2.png");
+        sprite.setTexture(texture);
+        sprite.setScale(2.7, 3);
+        swap_frame_camminata = 2;
+    } else if (swap_frame_camminata == 2) {
+        texture.loadFromFile("../assets/animazione_camminatasx/knightSX-3.png");
+        sprite.setTexture(texture);
+        sprite.setScale(2.7, 3);
+        swap_frame_camminata = 3;
+    } else if (swap_frame_camminata == 3) {
+        texture.loadFromFile("../assets/animazione_camminatasx/knightSX-4.png");
+        sprite.setTexture(texture);
+        sprite.setScale(2.7, 3);
+        swap_frame_camminata = 4;
+    } else if (swap_frame_camminata == 4) {
+        texture.loadFromFile("../assets/animazione_camminatasx/knightSX-5.png");
+        sprite.setTexture(texture);
+        sprite.setScale(2.7, 3);
+        swap_frame_camminata = 5;
+    } else if (swap_frame_camminata == 5) {
+        texture.loadFromFile("../assets/animazione_camminatasx/knightSX-6.png");
+        sprite.setTexture(texture);
+        sprite.setScale(2.7, 3);
+        swap_frame_camminata = 6;
+    } else if (swap_frame_camminata == 6) {
+        texture.loadFromFile("../assets/animazione_camminatasx/knightSX-7.png");
+        sprite.setTexture(texture);
+        sprite.setScale(2.7, 3);
+        swap_frame_camminata = 0;
+    }
+}
+
+void Personaggio::Camminata_UP() {
+
+    if (swap_frame_camminata == 0) {
+        texture.loadFromFile("../assets/animazione_camminata_knight_up/knight_up_animation-1.png");
+        sprite.setTexture(texture);
+        sprite.setScale(2.7, 3);
+        swap_frame_camminata = 1;
+    } else if (swap_frame_camminata == 1) {
+        texture.loadFromFile("../assets/animazione_camminata_knight_up/knight_up_animation-2.png");
+        sprite.setTexture(texture);
+        sprite.setScale(2.7, 3);
+        swap_frame_camminata = 2;
+    } else if (swap_frame_camminata == 2) {
+        texture.loadFromFile("../assets/animazione_camminata_knight_up/knight_up_animation-3.png");
+        sprite.setTexture(texture);
+        sprite.setScale(2.7, 3);
+        swap_frame_camminata = 3;
+    } else if (swap_frame_camminata == 3) {
+        texture.loadFromFile("../assets/animazione_camminata_knight_up/knight_up_animation-4.png");
+        sprite.setTexture(texture);
+        sprite.setScale(2.7, 3);
+        swap_frame_camminata = 4;
+    } else if (swap_frame_camminata == 4) {
+        texture.loadFromFile("../assets/animazione_camminata_knight_up/knight_up_animation-5.png");
+        sprite.setTexture(texture);
+        sprite.setScale(2.7, 3);
+        swap_frame_camminata = 5;
+    } else if (swap_frame_camminata == 5) {
+        texture.loadFromFile("../assets/animazione_camminata_knight_up/knight_up_animation-6.png");
+        sprite.setTexture(texture);
+        sprite.setScale(2.7, 3);
+        swap_frame_camminata = 6;
+    } else if (swap_frame_camminata == 6) {
+        texture.loadFromFile("../assets/animazione_camminata_knight_up/knight_up_animation-7.png");
+        sprite.setTexture(texture);
+        sprite.setScale(2.7, 3);
+        swap_frame_camminata = 7;
+    } else if (swap_frame_camminata == 7) {
+        texture.loadFromFile("../assets/animazione_camminata_knight_up/knight_up_animation-8.png");
+        sprite.setTexture(texture);
+        sprite.setScale(2.7, 3);
+        swap_frame_camminata = 0;
+    }
+}
