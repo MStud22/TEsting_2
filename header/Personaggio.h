@@ -33,6 +33,8 @@ public:
 
     void Camminata_UP();
 
+    void Camminata_DOWN();
+
     void aggiornaPosizione();
 
     void Collision(string bordo);

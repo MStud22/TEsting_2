@@ -69,14 +69,21 @@ void Personaggio::disegna() {
         }
     }
 
-    if (moving == "up")
+    if (moving == "up") {
         if (Engine::getElapsedFrames() % 12 == 0) {
             Camminata_UP();
         }
+    }
+    if (moving == "down") {
+        if (Engine::getElapsedFrames() % 10 == 0) {
+            Camminata_DOWN();
+        }
+    }
 
     window_.draw(corpo_);
     window_.draw(bracciadx_);
     window_.draw(bracciasx_);
+
     window_.draw(gambadx_);
     window_.draw(gambasx_);
     window_.draw(testa_);
@@ -90,7 +97,7 @@ void Personaggio::aggiornaPosizione() {
 
     steady = false;
     key_pressed = false;
-
+    //todo fix if per evitare interruzioni nell'animazione
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && Personaggio::collisione != "left") {
         x_ -= size_ / 10.0f;
         steady = false;
@@ -102,20 +109,16 @@ void Personaggio::aggiornaPosizione() {
         moving = "dx";
         steady = false;
         key_pressed = true;
-        cout << "camiinata dx" << endl; //TODO rimuovi test
-
     } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && Personaggio::collisione != "top") {
         y_ -= size_ / 10.0f;
         steady = false;
         moving = "up";
         key_pressed = true;
-
     } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && Personaggio::collisione != "bottom") {
         y_ += size_ / 10.0f;
         steady = false;
         moving = "down";
         key_pressed = true;
-
     } else if (!key_pressed) {
         steady = true;
         moving = "";
@@ -308,7 +311,7 @@ void Personaggio::Camminata_SX() {
 }
 
 void Personaggio::Camminata_UP() {
-
+    //TODO rimuovi i primi due frame del personaggio per non farlo girare mentre cammina
     if (swap_frame_camminata == 0) {
         texture.loadFromFile("../assets/animazione_camminata_knight_up/knight_up_animation-1.png");
         sprite.setTexture(texture);
@@ -346,6 +349,30 @@ void Personaggio::Camminata_UP() {
         swap_frame_camminata = 7;
     } else if (swap_frame_camminata == 7) {
         texture.loadFromFile("../assets/animazione_camminata_knight_up/knight_up_animation-8.png");
+        sprite.setTexture(texture);
+        sprite.setScale(2.7, 3);
+        swap_frame_camminata = 0;
+    }
+}
+
+void Personaggio::Camminata_DOWN() {
+    if (swap_frame_camminata == 0) {
+        texture.loadFromFile("../assets/animazione_camminata_knight_down/knight_down_animation-1.png");
+        sprite.setTexture(texture);
+        sprite.setScale(2.7, 3);
+        swap_frame_camminata = 1;
+    } else if (swap_frame_camminata == 1) {
+        texture.loadFromFile("../assets/animazione_camminata_knight_down/knight_down_animation-2.png");
+        sprite.setTexture(texture);
+        sprite.setScale(2.7, 3);
+        swap_frame_camminata = 2;
+    } else if (swap_frame_camminata == 2) {
+        texture.loadFromFile("../assets/animazione_camminata_knight_down/knight_down_animation-3.png");
+        sprite.setTexture(texture);
+        sprite.setScale(2.7, 3);
+        swap_frame_camminata = 3;
+    } else if (swap_frame_camminata == 3) {
+        texture.loadFromFile("../assets/animazione_camminata_knight_down/knight_down_animation-4.png");
         sprite.setTexture(texture);
         sprite.setScale(2.7, 3);
         swap_frame_camminata = 0;
