@@ -27,6 +27,14 @@ public:
 
     void Steady_Animate();
 
+    void Camminata_DX();
+
+    void Camminata_SX();
+
+    void Camminata_UP();
+
+    void Camminata_DOWN();
+
     void aggiornaPosizione();
 
     void Collision(string bordo);
@@ -45,10 +53,15 @@ private:
     Texture texture;
     Sprite sprite;
     bool steady = true;
+    string moving;
+
+    //variabile movimento
+    bool key_pressed;
 
 
     //variabile per animazione
     int swap_frame = 0;
+    int swap_frame_camminata = 0;
 
 
 };
