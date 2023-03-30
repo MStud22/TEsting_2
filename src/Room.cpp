@@ -65,15 +65,22 @@ void Room::Pick_Room() {
 
 
 void Room::drawRoom(sf::RenderWindow &window) {
+    window.draw(background_image);
     window.draw(top);
     window.draw(bottom);
     window.draw(left);
     window.draw(right);
     window.draw(entrance);
     window.draw(exit);
+
+    /*
     for (const auto &wall: innerWalls) {
         window.draw(wall);
     }
+    */
+    //todo decidi come gestire innerwalls
+    //i muri posso generati e lasciati invisibili per poter permettere di integrare con il design di gicoo
+
 }
 
 
@@ -83,7 +90,9 @@ void Room::genera_FANGS() {
 
     //svuota innerWalls dai muri precedenti e ne crea nuovi
     innerWalls.clear();
-
+    background_texture.loadFromFile("../assets/background/background_FANGS.png");
+    background_image.setTexture(background_texture);
+    background_image.setScale(4, 4);
     //GENERA I WALLS
     //1
     sf::RectangleShape wall(sf::Vector2f(wallWidth, wallHight));
@@ -133,6 +142,9 @@ void Room::genera_ZIGZAG() {
 
     //svuota innerWalls dai muri precedenti e ne crea nuovi
     innerWalls.clear();
+    background_texture.loadFromFile("../assets/background/background_ZIGZAG.png");
+    background_image.setTexture(background_texture);
+    background_image.setScale(4, 4);
     //GENERA I WALLS
     //1
     sf::RectangleShape wall(sf::Vector2f(wallWidth, wallHight));
@@ -170,6 +182,9 @@ void Room::genera_LONGCORRIDOR() {
 
     //svuota innerWalls dai muri precedenti e ne crea nuovi
     innerWalls.clear();
+    background_texture.loadFromFile("../assets/background/LONG_CORRIDOR.png");
+    background_image.setTexture(background_texture);
+    background_image.setScale(4, 4);
     //GENERA I WALLS
     //1
     sf::RectangleShape wall(sf::Vector2f(wallWidth, wallHight));

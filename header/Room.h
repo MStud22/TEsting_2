@@ -33,6 +33,8 @@ public:
 
 private:
     sf::Texture texture;
+    sf::Sprite background_image;
+    sf::Texture background_texture;
 
     void generateInnerWalls();
 };

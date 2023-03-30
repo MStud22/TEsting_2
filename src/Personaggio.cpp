@@ -45,30 +45,23 @@ void Personaggio::disegna() {
 
     aggiornaPosizione();
     sprite.setPosition(x_ - 40, y_ - 55); //aggiusta la immagine per entrare nei limiti personaggio
-
     //aggioramenti animazioni
-
-    //TODO rimuovi testing
-
     if (steady) {
         if (Engine::getElapsedFrames() % 30 == 0) {
 
             Steady_Animate();
         }
     }
-
     if (moving == "dx") {
         if (Engine::getElapsedFrames() % 6 == 0) {
             Camminata_DX();
         }
     }
-
     if (moving == "sx") {
         if (Engine::getElapsedFrames() % 6 == 0) {
             Camminata_SX();
         }
     }
-
     if (moving == "up") {
         if (Engine::getElapsedFrames() % 12 == 0) {
             Camminata_UP();
@@ -80,13 +73,7 @@ void Personaggio::disegna() {
         }
     }
 
-    window_.draw(corpo_);
-    window_.draw(bracciadx_);
-    window_.draw(bracciasx_);
 
-    window_.draw(gambadx_);
-    window_.draw(gambasx_);
-    window_.draw(testa_);
     window_.draw(sprite);
 
 

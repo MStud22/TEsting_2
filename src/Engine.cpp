@@ -9,12 +9,16 @@
 #include "SnakeAnimation.cpp"
 
 
-const sf::Time Engine::TimeperFrame = seconds(1.f/60.f);        //creiamo una costante che definisce il Frame come un sessantesimo di secondo
+const sf::Time Engine::
 
-Engine::Engine()
-{
-    resolution = Vector2f (800,600); // dimensioni finestra
-    window.create(VideoMode(resolution.x,resolution.y),"Test",Style::Default);  //creazione finestra,risoluzione,nome,stile
+
+        TimeperFrame = seconds(
+                1.f / 60.f);        //creiamo una costante che definisce il Frame come un sessantesimo di secondo
+
+Engine::Engine() {
+    resolution = Vector2f(800, 600); // dimensioni finestra
+    window.create(VideoMode(resolution.x, resolution.y), "Test",
+                  Style::Default);  //creazione finestra,risoluzione,nome,stile
     window.setFramerateLimit(FPS);
 
 
@@ -23,6 +27,12 @@ Engine::Engine()
 void Engine::run() {
 
     //Main game loop , il gioco viene processato dalla classe engine
+    /*TESTING SFONDO*/
+    sf::Texture background;
+    background.loadFromFile("../assets/background/background.png");
+    Sprite sprite;
+    sprite.setTexture(background);
+    sprite.setScale(4, 4);
 
 
     //implementazione menu
@@ -68,6 +78,7 @@ void Engine::run() {
 
         if (!AnimatingSnake && !startMenu) {
             window.clear();
+            window.draw(sprite);
             room.drawRoom(window);
             p.disegna();
 
