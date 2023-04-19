@@ -46,9 +46,11 @@ Room::Room(int width_, int height_) : width_(width_),height_(height_) {
 void Room::Pick_Room() {
     //attraverso un random , scegli tra un numero pre impostato di stanze
 
+
     // Genera un numero casuale compreso tra 1 e 5
     std::srand(std::time(nullptr));
     int room_number = std::rand() % 3 + 1;
+
 
 
     if (room_number == 1) {
@@ -78,7 +80,7 @@ void Room::drawRoom(sf::RenderWindow &window) {
         window.draw(wall);
     }
     */
-    //todo decidi come gestire innerwalls
+
     //i muri posso generati e lasciati invisibili per poter permettere di integrare con il design di gicoo
 
 }
@@ -148,7 +150,7 @@ void Room::genera_ZIGZAG() {
     //GENERA I WALLS
     //1
     sf::RectangleShape wall(sf::Vector2f(wallWidth, wallHight));
-    wall.setPosition(width_ / 5, 0);
+    wall.setPosition(width_ / 5, -100);
     innerWalls.push_back(wall);
     //2
     sf::RectangleShape wall2(sf::Vector2f(wallWidth, wallHight));
@@ -161,8 +163,8 @@ void Room::genera_ZIGZAG() {
 
     //rende tutti i muri  su Innerwalls bianchi
     for (auto &wall: innerWalls) {
-        wall.setFillColor(sf::Color::White);
-        wall.setTexture(&texture);
+        wall.setFillColor(sf::Color::Red);
+
     }
 
     // Crea l'ingresso e l'uscita
@@ -213,4 +215,5 @@ void Room::genera_LONGCORRIDOR() {
     Room::entrance.setPosition(width_ - (width_ / 10), height_ / 2);
 }
 
+//TODO sviluppare la stanza di scelta personaggio, dovra essere una stanza speciale che si genera solo a inizio partita e mai più
 
