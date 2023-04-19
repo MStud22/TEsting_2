@@ -21,9 +21,18 @@ void Engine::input() {
             if (event.type == Event::KeyPressed) {
                 if (Keyboard::isKeyPressed((Keyboard::Enter))) {
                     startMenu = false;
+                    scelta_personaggio = true;
+
                 }
             }
         }
+        if (scelta_personaggio)
+            if (event.type == Event::KeyPressed) {
+                if (Keyboard::isKeyPressed((Keyboard::Space))) {
+                    scelta_personaggio = false;
+
+                }
+            }
 
 
     }

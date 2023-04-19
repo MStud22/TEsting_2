@@ -3,7 +3,7 @@ project(TEsting_2)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(TEsting_2 src/main.cpp src/Engine.cpp header/Engine.h src/Input.cpp src/Personaggio.cpp header/Personaggio.h src/Room.cpp header/Room.h header/Version.h src/SnakeAnimation.cpp src/Menu.cpp header/Menu.h src/getElapsedFrames.cpp)
+add_executable(TEsting_2 src/main.cpp src/Engine.cpp header/Engine.h src/Input.cpp src/Personaggio.cpp header/Personaggio.h src/Room.cpp header/Room.h header/Version.h src/SnakeAnimation.cpp src/Menu.cpp header/Menu.h src/getElapsedFrames.cpp src/Scelta_personaggio.cpp header/Scelta_personaggio.h)
 include_directories(headers /usr/include c:/SFML/include)
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake_modules")
 find_package(SFML REQUIRED  graphics window system )

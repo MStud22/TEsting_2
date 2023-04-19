@@ -28,6 +28,7 @@ public:
     static int getElapsedFrames();
 
     bool startMenu = true;
+    bool scelta_personaggio = false;
 
     //abbiamo bisogno di un main loop per effettture il run
     void run();

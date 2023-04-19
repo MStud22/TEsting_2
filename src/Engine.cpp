@@ -7,6 +7,7 @@
 #include "../header/Room.h"
 #include "../header/Menu.h"
 #include "SnakeAnimation.cpp"
+#include "../header/Scelta_personaggio.h"
 
 
 const sf::Time Engine::
@@ -27,7 +28,7 @@ Engine::Engine() {
 void Engine::run() {
 
     //Main game loop , il gioco viene processato dalla classe engine
-    /*TESTING SFONDO*/
+
     sf::Texture background;
     background.loadFromFile("../assets/background/background.png");
     Sprite sprite;
@@ -37,9 +38,12 @@ void Engine::run() {
 
     //implementazione menu
     Menu menu(window);
-    std::vector<std::string> menu_items = {"Dungeon", "Adventure"};
     bool visible = true;  // usiamo questa variabile booleana per controllare la visibilità del testo
     //voglio che il nostro testo non lampeggi e sioa ben visibile all'occhio umano
+
+    //implementazione scelta personaggio
+    Scelta_personaggio chose(window);
+
 
     //animazione Switch / stanze
     Clock clock;
@@ -71,12 +75,23 @@ void Engine::run() {
 
         }
 
+        cout << scelta_personaggio << endl;
+        if (scelta_personaggio) {
+            if (clock.getElapsedTime().asSeconds() > 0.5f) // impostiamo un intervallo di 0,5 secondi
+            {
+                visible = !visible; // invertiamo la visibilità del testo
+                clock.restart(); // riavviamo l'orologio
+            }
+            if (visible)
+                chose.draw();
+            input();
+        }
 
 
 
         /*controlla se il gioco sta effettuando una animazione o una cinematica */
 
-        if (!AnimatingSnake && !startMenu) {
+        if (!AnimatingSnake && !startMenu && !scelta_personaggio) {
             window.clear();
             window.draw(sprite);
             room.drawRoom(window);
