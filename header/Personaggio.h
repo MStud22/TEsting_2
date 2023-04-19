@@ -55,6 +55,9 @@ private:
     bool steady = true;
     string moving;
 
+    //TODO  classe test
+    string classe = "knight";
+
     //variabile movimento
     bool key_pressed;
 
