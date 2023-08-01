@@ -18,9 +18,10 @@ public:
     sf::CircleShape testa_;
     sf::RenderWindow &window_;
     float x_, y_;
+    string classe_;
 
 
-    Personaggio(float x, float y, float size, RenderWindow &window);
+    Personaggio(float x, float y, float size, RenderWindow &window, string classe);
 
     void disegna();
 
@@ -56,7 +57,8 @@ private:
     string moving;
 
     //TODO  classe test
-    string classe = "knight";
+
+
 
     //variabile movimento
     bool key_pressed;

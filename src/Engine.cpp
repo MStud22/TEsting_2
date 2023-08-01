@@ -51,8 +51,7 @@ void Engine::run() {
     float dt = clock.restart().asSeconds();
     bool AnimatingSnake = false;
 
-    //Personaggio
-    Personaggio p(100, 200, 30, window);
+    Personaggio p(100, 200, 30, window, classe);
 
     //stanza e variabili di appoggio per il suo funzionamento
     Room room(800, 400);
@@ -61,6 +60,9 @@ void Engine::run() {
 
     while (window.isOpen()) {
 
+        /*
+         * CODICE CHE CONTROLLA STANZE PARTICOLARI O STANZE INIZIALI
+         */
 
         if (startMenu) {
 
@@ -85,6 +87,8 @@ void Engine::run() {
             if (visible)
                 chose.draw();
             input();
+            //Personaggio
+
         }
 
 

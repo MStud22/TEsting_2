@@ -23,7 +23,7 @@ private:
     string Knight = "The Mighty Knight";
     string Mage = "The Powerfull Mage";
     string Thief = "The Sneaky Thief";
-
+    string Archer = "The Brave Archer";
     sf::RenderWindow &window_;
 };
 

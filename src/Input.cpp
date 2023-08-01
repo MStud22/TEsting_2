@@ -28,9 +28,9 @@ void Engine::input() {
         }
         if (scelta_personaggio)
             if (event.type == Event::KeyPressed) {
-                if (Keyboard::isKeyPressed((Keyboard::Space))) {
+                if (Keyboard::isKeyPressed((Keyboard::Num1))) {
                     scelta_personaggio = false;
-
+                    Engine::classe = "knight";
                 }
             }
 

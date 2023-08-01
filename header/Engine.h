@@ -34,6 +34,10 @@ public:
     void run();
 
     int frames;
+
+    string classe = "knight";
+
+    String getClasse();
 };
 
 
