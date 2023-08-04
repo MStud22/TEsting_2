@@ -21,7 +21,7 @@ public:
     string classe_;
 
 
-    Personaggio(float x, float y, float size, RenderWindow &window, string classe);
+    Personaggio(float x, float y, float size, RenderWindow &window);
 
     void disegna();
 
@@ -50,13 +50,17 @@ public:
 
     string getCollisionDirection(const FloatRect &otherRect) const;
 
+    void setClasse(const string &classe);
+
+    void setTexture(string classe_);
+
 private:
     Texture texture;
     Sprite sprite;
     bool steady = true;
     string moving;
 
-    //TODO  classe test
+
 
 
 

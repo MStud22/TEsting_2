@@ -13,7 +13,7 @@ class Engine {
 private:
     //Window
     Vector2f resolution;
-
+    bool choise_done = false;
     const unsigned int FPS = 60;
     static const Time TimeperFrame;
 
@@ -35,7 +35,7 @@ public:
 
     int frames;
 
-    string classe = "knight";
+    string classe = "";
 
     String getClasse();
 };

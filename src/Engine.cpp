@@ -51,11 +51,13 @@ void Engine::run() {
     float dt = clock.restart().asSeconds();
     bool AnimatingSnake = false;
 
-    Personaggio p(100, 200, 30, window, classe);
+    //CREA IL PERSONAGGIO DOPO HE è STATA SCELTA LA CLASSE
+    Personaggio p(100, 200, 30, window);
 
     //stanza e variabili di appoggio per il suo funzionamento
     Room room(800, 400);
 
+    //todo rimuovi o intgra controllo
 
 
     while (window.isOpen()) {
@@ -77,7 +79,7 @@ void Engine::run() {
 
         }
 
-        cout << scelta_personaggio << endl;
+
         if (scelta_personaggio) {
             if (clock.getElapsedTime().asSeconds() > 0.5f) // impostiamo un intervallo di 0,5 secondi
             {
@@ -87,13 +89,20 @@ void Engine::run() {
             if (visible)
                 chose.draw();
             input();
-            //Personaggio
+            if (choise_done) {
+                p.setClasse(classe);
+                p.setTexture(classe);
+            }
 
+            cout << classe << endl;
         }
 
 
-
         /*controlla se il gioco sta effettuando una animazione o una cinematica */
+
+        /*
+         *  CODICE DI MOVIMENTO E GIOCO VERO E PROPRIO
+         */
 
         if (!AnimatingSnake && !startMenu && !scelta_personaggio) {
             window.clear();
@@ -154,7 +163,8 @@ void Engine::run() {
         //////////////////////////////////////////////////////////////////////////*/
 
         /* ///////////////////////////////// ANIMAZIONE///////////////////////////////////////*/
-        while (AnimatingSnake && !startMenu) {
+
+        while (AnimatingSnake && !startMenu && !scelta_personaggio) {
             snake.update(dt);
             window.clear();
             snake.draw();

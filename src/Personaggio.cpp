@@ -4,8 +4,8 @@
 #include <iostream>
 #include "../header/Personaggio.h"
 
-Personaggio::Personaggio(float x, float y, float size, RenderWindow &window, string classe) :
-        x_(x), y_(y), size_(size), window_(window), classe_(classe)
+Personaggio::Personaggio(float x, float y, float size, RenderWindow &window) :
+        x_(x), y_(y), size_(size), window_(window)
 {
     //colore rappresentativo personaggio
     sf::Color color_personaggio(sf::Color::Black);
@@ -27,10 +27,7 @@ Personaggio::Personaggio(float x, float y, float size, RenderWindow &window, str
     // Imposta le dimensioni e il colore della testa
     testa_.setRadius(size_ / 4.5);
 
-    //imposta sprite immaggine
-    texture.loadFromFile("../assets/knight.png");
-    sprite.setTexture(texture);
-    sprite.setScale(2.7, 3);
+
 
 
 
@@ -41,6 +38,7 @@ Personaggio::Personaggio(float x, float y, float size, RenderWindow &window, str
 }
 
 void Personaggio::disegna() {
+
 
 
     aggiornaPosizione();
@@ -76,6 +74,9 @@ void Personaggio::disegna() {
 
     window_.draw(sprite);
 
+    //todo rimuovi controllo
+    cout << classe_ << endl;
+    cout << "sto disegnando " << endl;
 
 }
 
@@ -216,7 +217,7 @@ void Personaggio::Steady_Animate() {
         swap_frame = 0;
 
     }
-    cout << "animating" << endl;
+    cout << "animating steady" << endl;
 }
 
 void Personaggio::Camminata_DX() {
@@ -367,3 +368,18 @@ void Personaggio::Camminata_DOWN() {
         swap_frame_camminata = 0;
     }
 }
+
+void Personaggio::setClasse(const string &classe) {
+    classe_ = classe;
+}
+
+//todo rimuovi test
+
+void Personaggio::setTexture(string classe_) {
+    //imposta sprite immaggine
+    texture.loadFromFile("../assets/" + classe_ + ".png");
+    sprite.setTexture(texture);
+    sprite.setScale(2.7, 3);
+
+}
+
