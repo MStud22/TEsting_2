@@ -255,7 +255,7 @@ void Personaggio::Camminata_DX() {
         texture.loadFromFile("../assets/" + classe_ + "_animation/animazione_camminatadx/" + classe_ + "DX-7.png");
         sprite.setTexture(texture);
         sprite.setScale(2.7, 3);
-        swap_frame_camminata = 0;
+        swap_frame_camminata = 1;
     }
 }
 
