@@ -13,7 +13,6 @@ class Menu {
 public:
 
     Menu(sf::RenderWindow &window);
-
     void draw();
 
 private:
