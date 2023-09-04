@@ -1,0 +1,12 @@
+# ninja log v5
+11	8642	7155364221331778	CMakeFiles/TEsting_2.dir/src/Engine.cpp.obj	b291d085f18834fe
+8	2684	7126175003769338	CMakeFiles/TEsting_2.dir/src/main.cpp.obj	abe752a96e91632f
+7	2080	7139130489071105	CMakeFiles/TEsting_2.dir/src/Personaggio.cpp.obj	9eaf1d2569959ba2
+17	3227	7126175009374029	CMakeFiles/TEsting_2.dir/src/Input.cpp.obj	e70ff2b2f35602d9
+24	1152	7035929428413909	CMakeFiles/TEsting_2.dir/src/Room.cpp.obj	c36e8ceec04f78c3
+8643	9712	7155364231929017	TEsting_2.exe	1a926950a35b675b
+1	248	7155404191289323	build.ninja	127fcecb00b192a7
+22	2707	7126175003846136	CMakeFiles/TEsting_2.dir/src/SnakeAnimation.cpp.obj	417a1970fe1b476c
+178	4528	7155364179759131	CMakeFiles/TEsting_2.dir/src/Menu.cpp.obj	de7c6f8d219f863a
+29	2746	7126175004398014	CMakeFiles/TEsting_2.dir/src/getElapsedFrames.cpp.obj	52fbd6e0a4a12d8f
+1094	1952	7126089088185410	CMakeFiles/TEsting_2.dir/src/Scelta_personaggio.cpp.obj	b6a403e34f292ad0

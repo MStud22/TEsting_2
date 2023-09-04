@@ -13,7 +13,7 @@ class Engine {
 private:
     //Window
     Vector2f resolution;
-
+    bool choise_done = false;
     const unsigned int FPS = 60;
     static const Time TimeperFrame;
 
@@ -28,11 +28,16 @@ public:
     static int getElapsedFrames();
 
     bool startMenu = true;
+    bool scelta_personaggio = false;
 
     //abbiamo bisogno di un main loop per effettture il run
     void run();
 
     int frames;
+
+    string classe = "";
+
+    String getClasse();
 };
 
 

@@ -18,6 +18,7 @@ public:
     sf::CircleShape testa_;
     sf::RenderWindow &window_;
     float x_, y_;
+    string classe_;
 
 
     Personaggio(float x, float y, float size, RenderWindow &window);
@@ -49,11 +50,16 @@ public:
 
     string getCollisionDirection(const FloatRect &otherRect) const;
 
+    void setClasse(const string &classe);
+
+    void setTexture(string classe_);
+
 private:
     Texture texture;
     Sprite sprite;
     bool steady = true;
     string moving;
+
 
     //variabile movimento
     bool key_pressed;

@@ -4,7 +4,7 @@
 #include <iostream>
 #include "../header/Personaggio.h"
 
-Personaggio::Personaggio(float x, float y, float size, RenderWindow& window) :
+Personaggio::Personaggio(float x, float y, float size, RenderWindow &window) :
         x_(x), y_(y), size_(size), window_(window)
 {
     //colore rappresentativo personaggio
@@ -27,10 +27,7 @@ Personaggio::Personaggio(float x, float y, float size, RenderWindow& window) :
     // Imposta le dimensioni e il colore della testa
     testa_.setRadius(size_ / 4.5);
 
-    //imposta sprite immaggine
-    texture.loadFromFile("../assets/knight.png");
-    sprite.setTexture(texture);
-    sprite.setScale(2.7, 3);
+
 
 
 
@@ -41,6 +38,7 @@ Personaggio::Personaggio(float x, float y, float size, RenderWindow& window) :
 }
 
 void Personaggio::disegna() {
+
 
 
     aggiornaPosizione();
@@ -76,6 +74,9 @@ void Personaggio::disegna() {
 
     window_.draw(sprite);
 
+    //todo rimuovi controllo
+    cout << classe_ << endl;
+    cout << "sto disegnando " << endl;
 
 }
 
@@ -203,94 +204,95 @@ void Personaggio::Collision(string bordo) {
 }
 
 void Personaggio::Steady_Animate() {
+
     if (swap_frame == 0) {
-        texture.loadFromFile("../assets/Knight_animation/knight.png");
+        texture.loadFromFile("../assets/" + classe_ + "_animation/steady_animation/" + classe_ + ".png");
         sprite.setTexture(texture);
         sprite.setScale(2.7, 3);
         swap_frame = 1;
     } else if (swap_frame == 1) {
-        texture.loadFromFile("../assets/Knight_animation/knight2.png");
+        texture.loadFromFile("../assets/" + classe_ + "_animation/steady_animation/" + classe_ + "2.png");
         sprite.setTexture(texture);
         sprite.setScale(2.7, 3);
         swap_frame = 0;
 
     }
-    cout << "animating" << endl;
+    cout << "animating steady" << endl;
 }
 
 void Personaggio::Camminata_DX() {
     if (swap_frame_camminata == 0) {
-        texture.loadFromFile("../assets/animazione_camminatadx/knight_sx_1.png");
+        texture.loadFromFile("../assets/" + classe_ + "_animation/animazione_camminatadx/" + classe_ + "DX-1.png");
         sprite.setTexture(texture);
         sprite.setScale(2.7, 3);
         swap_frame_camminata = 1;
     } else if (swap_frame_camminata == 1) {
-        texture.loadFromFile("../assets/animazione_camminatadx/knight_sx_2.png");
+        texture.loadFromFile("../assets/" + classe_ + "_animation/animazione_camminatadx/" + classe_ + "DX-2.png");
         sprite.setTexture(texture);
         sprite.setScale(2.7, 3);
         swap_frame_camminata = 2;
     } else if (swap_frame_camminata == 2) {
-        texture.loadFromFile("../assets/animazione_camminatadx/knight_sx_3.png");
+        texture.loadFromFile("../assets/" + classe_ + "_animation/animazione_camminatadx/" + classe_ + "DX-3.png");
         sprite.setTexture(texture);
         sprite.setScale(2.7, 3);
         swap_frame_camminata = 3;
     } else if (swap_frame_camminata == 3) {
-        texture.loadFromFile("../assets/animazione_camminatadx/knight_sx_4.png");
+        texture.loadFromFile("../assets/" + classe_ + "_animation/animazione_camminatadx/" + classe_ + "DX-4.png");
         sprite.setTexture(texture);
         sprite.setScale(2.7, 3);
         swap_frame_camminata = 4;
     } else if (swap_frame_camminata == 4) {
-        texture.loadFromFile("../assets/animazione_camminatadx/knight_sx_5.png");
+        texture.loadFromFile("../assets/" + classe_ + "_animation/animazione_camminatadx/" + classe_ + "DX-5.png");
         sprite.setTexture(texture);
         sprite.setScale(2.7, 3);
         swap_frame_camminata = 5;
     } else if (swap_frame_camminata == 5) {
-        texture.loadFromFile("../assets/animazione_camminatadx/knight_sx_6.png");
+        texture.loadFromFile("../assets/" + classe_ + "_animation/animazione_camminatadx/" + classe_ + "DX-6.png");
         sprite.setTexture(texture);
         sprite.setScale(2.7, 3);
         swap_frame_camminata = 6;
     } else if (swap_frame_camminata == 6) {
-        texture.loadFromFile("../assets/animazione_camminatadx/knight_sx_7.png");
+        texture.loadFromFile("../assets/" + classe_ + "_animation/animazione_camminatadx/" + classe_ + "DX-7.png");
         sprite.setTexture(texture);
         sprite.setScale(2.7, 3);
-        swap_frame_camminata = 0;
+        swap_frame_camminata = 1;
     }
 }
 
 
 void Personaggio::Camminata_SX() {
     if (swap_frame_camminata == 0) {
-        texture.loadFromFile("../assets/animazione_camminatasx/knightSX-1.png");
+        texture.loadFromFile("../assets/" + classe_ + "_animation/animazione_camminatasx/" + classe_ + "SX-1.png");
         sprite.setTexture(texture);
         sprite.setScale(2.7, 3);
         swap_frame_camminata = 1;
     } else if (swap_frame_camminata == 1) {
-        texture.loadFromFile("../assets/animazione_camminatasx/knightSX-2.png");
+        texture.loadFromFile("../assets/" + classe_ + "_animation/animazione_camminatasx/" + classe_ + "SX-2.png");
         sprite.setTexture(texture);
         sprite.setScale(2.7, 3);
         swap_frame_camminata = 2;
     } else if (swap_frame_camminata == 2) {
-        texture.loadFromFile("../assets/animazione_camminatasx/knightSX-3.png");
+        texture.loadFromFile("../assets/" + classe_ + "_animation/animazione_camminatasx/" + classe_ + "SX-3.png");
         sprite.setTexture(texture);
         sprite.setScale(2.7, 3);
         swap_frame_camminata = 3;
     } else if (swap_frame_camminata == 3) {
-        texture.loadFromFile("../assets/animazione_camminatasx/knightSX-4.png");
+        texture.loadFromFile("../assets/" + classe_ + "_animation/animazione_camminatasx/" + classe_ + "SX-4.png");
         sprite.setTexture(texture);
         sprite.setScale(2.7, 3);
         swap_frame_camminata = 4;
     } else if (swap_frame_camminata == 4) {
-        texture.loadFromFile("../assets/animazione_camminatasx/knightSX-5.png");
+        texture.loadFromFile("../assets/" + classe_ + "_animation/animazione_camminatasx/" + classe_ + "SX-5.png");
         sprite.setTexture(texture);
         sprite.setScale(2.7, 3);
         swap_frame_camminata = 5;
     } else if (swap_frame_camminata == 5) {
-        texture.loadFromFile("../assets/animazione_camminatasx/knightSX-6.png");
+        texture.loadFromFile("../assets/" + classe_ + "_animation/animazione_camminatasx/" + classe_ + "SX-6.png");
         sprite.setTexture(texture);
         sprite.setScale(2.7, 3);
         swap_frame_camminata = 6;
     } else if (swap_frame_camminata == 6) {
-        texture.loadFromFile("../assets/animazione_camminatasx/knightSX-7.png");
+        texture.loadFromFile("../assets/" + classe_ + "_animation/animazione_camminatasx/" + classe_ + "SX-7.png");
         sprite.setTexture(texture);
         sprite.setScale(2.7, 3);
         swap_frame_camminata = 0;
@@ -299,43 +301,44 @@ void Personaggio::Camminata_SX() {
 
 void Personaggio::Camminata_UP() {
     //TODO rimuovi i primi due frame del personaggio per non farlo girare mentre cammina
+
     if (swap_frame_camminata == 0) {
-        texture.loadFromFile("../assets/animazione_camminata_knight_up/knight_up_animation-1.png");
+        texture.loadFromFile("../assets/" + classe_ + "_animation/animazione_camminata_up/" + classe_ + "UP-1.png");
         sprite.setTexture(texture);
         sprite.setScale(2.7, 3);
         swap_frame_camminata = 1;
     } else if (swap_frame_camminata == 1) {
-        texture.loadFromFile("../assets/animazione_camminata_knight_up/knight_up_animation-2.png");
+        texture.loadFromFile("../assets/" + classe_ + "_animation/animazione_camminata_up/" + classe_ + "UP-2.png");
         sprite.setTexture(texture);
         sprite.setScale(2.7, 3);
         swap_frame_camminata = 2;
     } else if (swap_frame_camminata == 2) {
-        texture.loadFromFile("../assets/animazione_camminata_knight_up/knight_up_animation-3.png");
+        texture.loadFromFile("../assets/" + classe_ + "_animation/animazione_camminata_up/" + classe_ + "UP-3.png");
         sprite.setTexture(texture);
         sprite.setScale(2.7, 3);
         swap_frame_camminata = 3;
     } else if (swap_frame_camminata == 3) {
-        texture.loadFromFile("../assets/animazione_camminata_knight_up/knight_up_animation-4.png");
+        texture.loadFromFile("../assets/" + classe_ + "_animation/animazione_camminata_up/" + classe_ + "UP-4.png");
         sprite.setTexture(texture);
         sprite.setScale(2.7, 3);
         swap_frame_camminata = 4;
     } else if (swap_frame_camminata == 4) {
-        texture.loadFromFile("../assets/animazione_camminata_knight_up/knight_up_animation-5.png");
+        texture.loadFromFile("../assets/" + classe_ + "_animation/animazione_camminata_up/" + classe_ + "UP-5.png");
         sprite.setTexture(texture);
         sprite.setScale(2.7, 3);
         swap_frame_camminata = 5;
     } else if (swap_frame_camminata == 5) {
-        texture.loadFromFile("../assets/animazione_camminata_knight_up/knight_up_animation-6.png");
+        texture.loadFromFile("../assets/" + classe_ + "_animation/animazione_camminata_up/" + classe_ + "UP-6.png");
         sprite.setTexture(texture);
         sprite.setScale(2.7, 3);
         swap_frame_camminata = 6;
     } else if (swap_frame_camminata == 6) {
-        texture.loadFromFile("../assets/animazione_camminata_knight_up/knight_up_animation-7.png");
+        texture.loadFromFile("../assets/" + classe_ + "_animation/animazione_camminata_up/" + classe_ + "UP-7.png");
         sprite.setTexture(texture);
         sprite.setScale(2.7, 3);
         swap_frame_camminata = 7;
     } else if (swap_frame_camminata == 7) {
-        texture.loadFromFile("../assets/animazione_camminata_knight_up/knight_up_animation-8.png");
+        texture.loadFromFile("../assets/" + classe_ + "_animation/animazione_camminata_up/" + classe_ + "UP-8.png");
         sprite.setTexture(texture);
         sprite.setScale(2.7, 3);
         swap_frame_camminata = 0;
@@ -344,24 +347,39 @@ void Personaggio::Camminata_UP() {
 
 void Personaggio::Camminata_DOWN() {
     if (swap_frame_camminata == 0) {
-        texture.loadFromFile("../assets/animazione_camminata_knight_down/knight_down_animation-1.png");
+        texture.loadFromFile("../assets/" + classe_ + "_animation/animazione_camminata_down/" + classe_ + "DOWN-1.png");
         sprite.setTexture(texture);
         sprite.setScale(2.7, 3);
         swap_frame_camminata = 1;
     } else if (swap_frame_camminata == 1) {
-        texture.loadFromFile("../assets/animazione_camminata_knight_down/knight_down_animation-2.png");
+        texture.loadFromFile("../assets/" + classe_ + "_animation/animazione_camminata_down/" + classe_ + "DOWN-2.png");
         sprite.setTexture(texture);
         sprite.setScale(2.7, 3);
         swap_frame_camminata = 2;
     } else if (swap_frame_camminata == 2) {
-        texture.loadFromFile("../assets/animazione_camminata_knight_down/knight_down_animation-3.png");
+        texture.loadFromFile("../assets/" + classe_ + "_animation/animazione_camminata_down/" + classe_ + "DOWN-3.png");
         sprite.setTexture(texture);
         sprite.setScale(2.7, 3);
         swap_frame_camminata = 3;
     } else if (swap_frame_camminata == 3) {
-        texture.loadFromFile("../assets/animazione_camminata_knight_down/knight_down_animation-4.png");
+        texture.loadFromFile("../assets/" + classe_ + "_animation/animazione_camminata_down/" + classe_ + "DOWN-4.png");
         sprite.setTexture(texture);
         sprite.setScale(2.7, 3);
         swap_frame_camminata = 0;
     }
 }
+
+void Personaggio::setClasse(const string &classe) {
+    classe_ = classe;
+}
+
+//todo rimuovi test
+
+void Personaggio::setTexture(string classe_) {
+    //imposta sprite immaggine
+    texture.loadFromFile("../assets/" + classe_ + ".png");
+    sprite.setTexture(texture);
+    sprite.setScale(2.7, 3);
+
+}
+

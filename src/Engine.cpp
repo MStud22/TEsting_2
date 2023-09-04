@@ -7,6 +7,7 @@
 #include "../header/Room.h"
 #include "../header/Menu.h"
 #include "SnakeAnimation.cpp"
+#include "../header/Scelta_personaggio.h"
 
 
 const sf::Time Engine::
@@ -27,7 +28,7 @@ Engine::Engine() {
 void Engine::run() {
 
     //Main game loop , il gioco viene processato dalla classe engine
-    /*TESTING SFONDO*/
+
     sf::Texture background;
     background.loadFromFile("../assets/background/background.png");
     Sprite sprite;
@@ -37,9 +38,12 @@ void Engine::run() {
 
     //implementazione menu
     Menu menu(window);
-    std::vector<std::string> menu_items = {"Dungeon", "Adventure"};
     bool visible = true;  // usiamo questa variabile booleana per controllare la visibilità del testo
     //voglio che il nostro testo non lampeggi e sioa ben visibile all'occhio umano
+
+    //implementazione scelta personaggio
+    Scelta_personaggio chose(window);
+
 
     //animazione Switch / stanze
     Clock clock;
@@ -47,16 +51,20 @@ void Engine::run() {
     float dt = clock.restart().asSeconds();
     bool AnimatingSnake = false;
 
-    //Personaggio
+    //CREA IL PERSONAGGIO DOPO HE è STATA SCELTA LA CLASSE
     Personaggio p(100, 200, 30, window);
 
     //stanza e variabili di appoggio per il suo funzionamento
     Room room(800, 400);
 
+    //todo rimuovi o intgra controllo
 
 
     while (window.isOpen()) {
 
+        /*
+         * CODICE CHE CONTROLLA STANZE PARTICOLARI O STANZE INIZIALI
+         */
 
         if (startMenu) {
 
@@ -72,11 +80,31 @@ void Engine::run() {
         }
 
 
+        if (scelta_personaggio) {
+            if (clock.getElapsedTime().asSeconds() > 0.5f) // impostiamo un intervallo di 0,5 secondi
+            {
+                visible = !visible; // invertiamo la visibilità del testo
+                clock.restart(); // riavviamo l'orologio
+            }
+            if (visible)
+                chose.draw();
+            input();
+            if (choise_done) {
+                p.setClasse(classe);
+                p.setTexture(classe);
+            }
+
+            cout << classe << endl;
+        }
 
 
         /*controlla se il gioco sta effettuando una animazione o una cinematica */
 
-        if (!AnimatingSnake && !startMenu) {
+        /*
+         *  CODICE DI MOVIMENTO E GIOCO VERO E PROPRIO
+         */
+
+        if (!AnimatingSnake && !startMenu && !scelta_personaggio) {
             window.clear();
             window.draw(sprite);
             room.drawRoom(window);
@@ -135,7 +163,8 @@ void Engine::run() {
         //////////////////////////////////////////////////////////////////////////*/
 
         /* ///////////////////////////////// ANIMAZIONE///////////////////////////////////////*/
-        while (AnimatingSnake && !startMenu) {
+
+        while (AnimatingSnake && !startMenu && !scelta_personaggio) {
             snake.update(dt);
             window.clear();
             snake.draw();

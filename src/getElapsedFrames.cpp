@@ -8,4 +8,8 @@ int Engine::getElapsedFrames() {
     auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(now - start);
     ++frames;
     return frames;
-} 
+}
+
+String Engine::getClasse() {
+    return classe;
+}
