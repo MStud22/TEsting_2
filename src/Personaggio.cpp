@@ -39,7 +39,9 @@ Personaggio::Personaggio(float x, float y, float size, RenderWindow &window) :
 
 void Personaggio::disegna() {
 
-    //todo CAPIRE3 LA DIFFERENZA TRA FRAME E FIXX
+    // i numeri accanto a ogni direzione di movimeto indicano i frame per secondo alla quale vogliamo effettuare l'animazione
+    //possiamo personalizzzare per ogni direzione la velocità che preferianmo
+
 
     aggiornaPosizione();
     sprite.setPosition(x_ - 40, y_ - 55); //aggiusta la immagine per entrare nei limiti personaggio

@@ -15,6 +15,10 @@ public :
     void Camminata_DOWN() override;
 
     void Camminata_UP() override;
+
+    void Camminata_DX() override;
+
+    void Camminata_SX() override;
 };
 
 
