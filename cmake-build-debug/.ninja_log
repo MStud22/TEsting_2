@@ -46,3 +46,7 @@
 1108	1468	7156224624907359	TEsting_2.exe	1aea639b657ba38e
 4	979	7156224871736032	CMakeFiles/TEsting_2.dir/src/Personaggio.cpp.obj	9eaf1d2569959ba2
 980	1265	7156224874547871	TEsting_2.exe	1aea639b657ba38e
+10	1098	7156229310258392	CMakeFiles/TEsting_2.dir/src/Mage.cpp.obj	1ed7471f9984a301
+7	1230	7156229311583382	CMakeFiles/TEsting_2.dir/src/Personaggio.cpp.obj	9eaf1d2569959ba2
+4	2634	7156229325594575	CMakeFiles/TEsting_2.dir/src/Engine.cpp.obj	b291d085f18834fe
+2634	2920	7156229328439960	TEsting_2.exe	1aea639b657ba38e
