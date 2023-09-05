@@ -1,12 +1,14 @@
 # ninja log v5
-11	8642	7155364221331778	CMakeFiles/TEsting_2.dir/src/Engine.cpp.obj	b291d085f18834fe
-8	2684	7126175003769338	CMakeFiles/TEsting_2.dir/src/main.cpp.obj	abe752a96e91632f
-7	2080	7139130489071105	CMakeFiles/TEsting_2.dir/src/Personaggio.cpp.obj	9eaf1d2569959ba2
-17	3227	7126175009374029	CMakeFiles/TEsting_2.dir/src/Input.cpp.obj	e70ff2b2f35602d9
-24	1152	7035929428413909	CMakeFiles/TEsting_2.dir/src/Room.cpp.obj	c36e8ceec04f78c3
-8643	9712	7155364231929017	TEsting_2.exe	1a926950a35b675b
-1	248	7155404191289323	build.ninja	127fcecb00b192a7
-22	2707	7126175003846136	CMakeFiles/TEsting_2.dir/src/SnakeAnimation.cpp.obj	417a1970fe1b476c
-178	4528	7155364179759131	CMakeFiles/TEsting_2.dir/src/Menu.cpp.obj	de7c6f8d219f863a
-29	2746	7126175004398014	CMakeFiles/TEsting_2.dir/src/getElapsedFrames.cpp.obj	52fbd6e0a4a12d8f
-1094	1952	7126089088185410	CMakeFiles/TEsting_2.dir/src/Scelta_personaggio.cpp.obj	b6a403e34f292ad0
+6	6299	7155447098773928	CMakeFiles/TEsting_2.dir/src/Engine.cpp.obj	b291d085f18834fe
+10	2766	7155417910776954	CMakeFiles/TEsting_2.dir/src/main.cpp.obj	abe752a96e91632f
+10	3607	7155447071903359	CMakeFiles/TEsting_2.dir/src/Personaggio.cpp.obj	9eaf1d2569959ba2
+2767	4647	7155417929706306	CMakeFiles/TEsting_2.dir/src/Input.cpp.obj	e70ff2b2f35602d9
+40	3218	7155417915315780	CMakeFiles/TEsting_2.dir/src/Room.cpp.obj	c36e8ceec04f78c3
+6299	6973	7155447105253628	TEsting_2.exe	892333528d4e2014
+2	305	7155453827384114	build.ninja	127fcecb00b192a7
+2829	4283	7155417926055095	CMakeFiles/TEsting_2.dir/src/SnakeAnimation.cpp.obj	417a1970fe1b476c
+34	2829	7155417911405284	CMakeFiles/TEsting_2.dir/src/Menu.cpp.obj	de7c6f8d219f863a
+73	2859	7155417911435195	CMakeFiles/TEsting_2.dir/src/getElapsedFrames.cpp.obj	52fbd6e0a4a12d8f
+2860	4477	7155417927950703	CMakeFiles/TEsting_2.dir/src/Scelta_personaggio.cpp.obj	b6a403e34f292ad0
+14	2706	7155447062037080	CMakeFiles/TEsting_2.dir/src/Knight.cpp.obj	6335a377ee8b2e6
+18	2930	7155447064780301	CMakeFiles/TEsting_2.dir/src/Mage.cpp.obj	1ed7471f9984a301

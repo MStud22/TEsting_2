@@ -28,13 +28,13 @@ public:
 
     void Steady_Animate();
 
-    void Camminata_DX();
+    void virtual Camminata_DX();
 
-    void Camminata_SX();
+    void virtual Camminata_SX();
 
-    void Camminata_UP();
+    void virtual Camminata_UP();
 
-    void Camminata_DOWN();
+    void virtual Camminata_DOWN();
 
     void aggiornaPosizione();
 
@@ -54,7 +54,7 @@ public:
 
     void setTexture(string classe_);
 
-private:
+protected:
     Texture texture;
     Sprite sprite;
     bool steady = true;
@@ -68,6 +68,7 @@ private:
     //variabile per animazione
     int swap_frame = 0;
     int swap_frame_camminata = 0;
+private:
 
 
 };

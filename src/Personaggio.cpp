@@ -39,7 +39,7 @@ Personaggio::Personaggio(float x, float y, float size, RenderWindow &window) :
 
 void Personaggio::disegna() {
 
-
+    //todo CAPIRE3 LA DIFFERENZA TRA FRAME E FIXX
 
     aggiornaPosizione();
     sprite.setPosition(x_ - 40, y_ - 55); //aggiusta la immagine per entrare nei limiti personaggio
@@ -74,9 +74,6 @@ void Personaggio::disegna() {
 
     window_.draw(sprite);
 
-    //todo rimuovi controllo
-    cout << classe_ << endl;
-    cout << "sto disegnando " << endl;
 
 }
 

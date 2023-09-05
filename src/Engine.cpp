@@ -8,6 +8,8 @@
 #include "../header/Menu.h"
 #include "SnakeAnimation.cpp"
 #include "../header/Scelta_personaggio.h"
+#include "../header/Knight.h"
+#include "../header/Mage.h"
 
 
 const sf::Time Engine::
@@ -44,6 +46,11 @@ void Engine::run() {
     //implementazione scelta personaggio
     Scelta_personaggio chose(window);
 
+    //CREA IL PERSONAGGIO DOPO HE è STATA SCELTA LA CLASSE
+    Personaggio *p;
+
+
+
 
     //animazione Switch / stanze
     Clock clock;
@@ -51,8 +58,7 @@ void Engine::run() {
     float dt = clock.restart().asSeconds();
     bool AnimatingSnake = false;
 
-    //CREA IL PERSONAGGIO DOPO HE è STATA SCELTA LA CLASSE
-    Personaggio p(100, 200, 30, window);
+
 
     //stanza e variabili di appoggio per il suo funzionamento
     Room room(800, 400);
@@ -90,8 +96,23 @@ void Engine::run() {
                 chose.draw();
             input();
             if (choise_done) {
-                p.setClasse(classe);
-                p.setTexture(classe);
+                if (classe ==
+                    "knight")      //TODO implementare tutte le altre classi con le loro fparticolari funzionalità
+                {
+                    cout << "scelto cavaliere" << endl;
+
+                    p = new Knight(100, 200, 30, window);
+                } else if (classe == "Mage") {
+                    cout << "scelto mago " << endl;
+
+                    p = new Mage(100, 200, 30, window);
+                } else {
+                    cout << "porcoiddio" << endl;
+
+                    p = new Personaggio(100, 200, 30, window);
+                }
+                p->setClasse(classe);
+                p->setTexture(classe);
             }
 
             cout << classe << endl;
@@ -108,7 +129,7 @@ void Engine::run() {
             window.clear();
             window.draw(sprite);
             room.drawRoom(window);
-            p.disegna();
+            p->disegna();
 
             input();//prima di aggiornare lo schermo , controlla per gli input
 
@@ -117,35 +138,36 @@ void Engine::run() {
             /*////////////////////////////////////////////////////////////////////////////////////
                    CODICE PER LIMITARE IL MOVIMENTO
               ///////////////////////////////////////////////////////////////////////////////////*/
-            if (p.getCollisionRect().intersects(room.top.getGlobalBounds())) {
-                p.Collision("top");
+            if (p->getCollisionRect().intersects(room.top.getGlobalBounds())) {
+                p->Collision("top");
             }
-            if (p.getCollisionRect().intersects(room.bottom.getGlobalBounds())) {
-                p.Collision("bottom");
+            if (p->getCollisionRect().intersects(room.bottom.getGlobalBounds())) {
+                p->Collision("bottom");
             }
-            if (p.getCollisionRect().intersects(room.left.getGlobalBounds())) {
-                p.Collision("left");
+            if (p->getCollisionRect().intersects(room.left.getGlobalBounds())) {
+                p->Collision("left");
             }
-            if (p.getCollisionRect().intersects(room.right.getGlobalBounds())) {
-                p.Collision("right");
+            if (p->getCollisionRect().intersects(room.right.getGlobalBounds())) {
+                p->Collision("right");
             }
-            if (p.getCollisionRect().intersects(room.top.getGlobalBounds()) ||
-                p.getCollisionRect().intersects(room.bottom.getGlobalBounds()) ||
-                p.getCollisionRect().intersects(room.left.getGlobalBounds()) ||
-                p.getCollisionRect().intersects(room.right.getGlobalBounds())) {
+            if (p->getCollisionRect().intersects(room.top.getGlobalBounds()) ||
+                p->getCollisionRect().intersects(room.bottom.getGlobalBounds()) ||
+                p->getCollisionRect().intersects(room.left.getGlobalBounds()) ||
+                p->getCollisionRect().intersects(room.right.getGlobalBounds())) {
                 for (const auto &wall: room.OuterWalls) {
-                    if (p.getCollisionRect().intersects(wall.getGlobalBounds())) {
-                        p.Collision(p.getCollisionDirection(wall.getGlobalBounds()));
+                    if (p->getCollisionRect().intersects(wall.getGlobalBounds())) {
+                        p->Collision(p->getCollisionDirection(wall.getGlobalBounds()));
                     }
                 }
             }
             //codice per collisione con muri interni
             for (const auto &wall: room.innerWalls) {
-                if (p.getCollisionRect().intersects(wall.getGlobalBounds())) {
-                    p.Collision(p.getCollisionDirection(wall.getGlobalBounds()));
+                if (p->getCollisionRect().intersects(wall.getGlobalBounds())) {
+                    p->Collision(p->getCollisionDirection(wall.getGlobalBounds()));
                 }
             }
-            if (p.getCollisionRect().intersects((room.entrance.getGlobalBounds()))) {
+            /* controlla l'uscita se avviare l'animazione */
+            if (p->getCollisionRect().intersects((room.entrance.getGlobalBounds()))) {
                 window.clear();
                 AnimatingSnake = true;
 
@@ -172,7 +194,7 @@ void Engine::run() {
                 AnimatingSnake = false;
                 room.Pick_Room();
                 snake.Reset();
-                p.setPosition(100, 200);
+                p->setPosition(100, 200);
                 break;
             }
             window.display();
