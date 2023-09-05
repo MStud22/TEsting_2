@@ -10,6 +10,7 @@
 #include "../header/Scelta_personaggio.h"
 #include "../header/Knight.h"
 #include "../header/Mage.h"
+#include "../header/Thief.h"
 
 
 const sf::Time Engine::
@@ -106,11 +107,17 @@ void Engine::run() {
                     cout << "scelto mago " << endl;
 
                     p = new Mage(100, 200, 30, window);
+                } else if (classe == "thief") {
+
+                    cout << "scelto ladro " << endl;
+
+                    p = new Thief(100, 200, 30, window);
                 } else {
-                    cout << "porcoiddio" << endl;
+                    cout << "Errore" << endl;
 
                     p = new Personaggio(100, 200, 30, window);
                 }
+
                 p->setClasse(classe);
                 p->setTexture(classe);
             }
@@ -203,6 +210,7 @@ void Engine::run() {
         frames = getElapsedFrames();
 
     }
+
 }
 
 

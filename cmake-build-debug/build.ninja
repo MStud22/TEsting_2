@@ -126,6 +126,13 @@ build CMakeFiles/TEsting_2.dir/src/Mage.cpp.obj: CXX_COMPILER__TEsting_2_Debug C
   OBJECT_DIR = CMakeFiles\TEsting_2.dir
   OBJECT_FILE_DIR = CMakeFiles\TEsting_2.dir\src
 
+build CMakeFiles/TEsting_2.dir/src/Thief.cpp.obj: CXX_COMPILER__TEsting_2_Debug C$:/Users/Marco/CLionProjects/TEsting_2/src/Thief.cpp || cmake_object_order_depends_target_TEsting_2
+  DEP_FILE = CMakeFiles\TEsting_2.dir\src\Thief.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu++1z
+  INCLUDES = -IC:/Users/Marco/CLionProjects/TEsting_2/headers -I/usr/include -Ic:/SFML/include -IC:/SFML/include
+  OBJECT_DIR = CMakeFiles\TEsting_2.dir
+  OBJECT_FILE_DIR = CMakeFiles\TEsting_2.dir\src
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target TEsting_2
@@ -134,7 +141,7 @@ build CMakeFiles/TEsting_2.dir/src/Mage.cpp.obj: CXX_COMPILER__TEsting_2_Debug C
 #############################################
 # Link the executable TEsting_2.exe
 
-build TEsting_2.exe: CXX_EXECUTABLE_LINKER__TEsting_2_Debug CMakeFiles/TEsting_2.dir/src/main.cpp.obj CMakeFiles/TEsting_2.dir/src/Engine.cpp.obj CMakeFiles/TEsting_2.dir/src/Input.cpp.obj CMakeFiles/TEsting_2.dir/src/Personaggio.cpp.obj CMakeFiles/TEsting_2.dir/src/Room.cpp.obj CMakeFiles/TEsting_2.dir/src/SnakeAnimation.cpp.obj CMakeFiles/TEsting_2.dir/src/Menu.cpp.obj CMakeFiles/TEsting_2.dir/src/getElapsedFrames.cpp.obj CMakeFiles/TEsting_2.dir/src/Scelta_personaggio.cpp.obj CMakeFiles/TEsting_2.dir/src/Knight.cpp.obj CMakeFiles/TEsting_2.dir/src/Mage.cpp.obj | C$:/SFML/lib/libsfml-graphics-d.a C$:/SFML/lib/libsfml-window-d.a C$:/SFML/lib/libsfml-system-d.a
+build TEsting_2.exe: CXX_EXECUTABLE_LINKER__TEsting_2_Debug CMakeFiles/TEsting_2.dir/src/main.cpp.obj CMakeFiles/TEsting_2.dir/src/Engine.cpp.obj CMakeFiles/TEsting_2.dir/src/Input.cpp.obj CMakeFiles/TEsting_2.dir/src/Personaggio.cpp.obj CMakeFiles/TEsting_2.dir/src/Room.cpp.obj CMakeFiles/TEsting_2.dir/src/SnakeAnimation.cpp.obj CMakeFiles/TEsting_2.dir/src/Menu.cpp.obj CMakeFiles/TEsting_2.dir/src/getElapsedFrames.cpp.obj CMakeFiles/TEsting_2.dir/src/Scelta_personaggio.cpp.obj CMakeFiles/TEsting_2.dir/src/Knight.cpp.obj CMakeFiles/TEsting_2.dir/src/Mage.cpp.obj CMakeFiles/TEsting_2.dir/src/Thief.cpp.obj | C$:/SFML/lib/libsfml-graphics-d.a C$:/SFML/lib/libsfml-window-d.a C$:/SFML/lib/libsfml-system-d.a
   FLAGS = -g
   LINK_LIBRARIES = C:/SFML/lib/libsfml-graphics-d.a  C:/SFML/lib/libsfml-window-d.a  C:/SFML/lib/libsfml-system-d.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\TEsting_2.dir

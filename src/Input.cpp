@@ -31,15 +31,21 @@ void Engine::input() {
         if (scelta_personaggio)
             if (event.type == Event::KeyPressed) {
                 if (Keyboard::isKeyPressed((Keyboard::Num1))) {
-                    scelta_personaggio = false;
+                    scelta_personaggio = false;                                     //determina in che "situazione" ci troviamo
                     Engine::classe = "knight";
                     choise_done = true;
                 }
                 if (Keyboard::isKeyPressed((Keyboard::Num2))) {
                     scelta_personaggio = false;
+                    Engine::classe = "thief";
+                    choise_done = true;
+                }
+                if (Keyboard::isKeyPressed((Keyboard::Num3))) {
+                    scelta_personaggio = false;
                     Engine::classe = "Mage";
                     choise_done = true;
                 }
+
                 if (Keyboard::isKeyPressed((Keyboard::Escape))) {
                     window.close();
 

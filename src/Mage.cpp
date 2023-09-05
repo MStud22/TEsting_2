@@ -10,7 +10,7 @@ Mage::Mage(float x, float y, float size, RenderWindow &window) : Personaggio(x, 
 }
 
 void Mage::Camminata_SX() {
-    cout << "animazione da derivata" << endl;
+
 
     if (swap_frame_camminata == 0) {
         texture.loadFromFile("../assets/" + classe_ + "_animation/animazione_camminatasx/" + classe_ + "SX-1.png");
