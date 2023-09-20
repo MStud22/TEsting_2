@@ -5,7 +5,8 @@
 #include <iostream>
 #include "../header/Mage.h"
 
-Mage::Mage(float x, float y, float size, RenderWindow &window) : Personaggio(x, y, size, window) {
+Mage::Mage(float x, float y, float size, RenderWindow &window, Weapon *weapon) : Personaggio(x, y, size, window,
+                                                                                             weapon), weapon(*weapon) {
 
 }
 

@@ -5,7 +5,9 @@
 #include "../header/Thief.h"
 
 
-Thief::Thief(float x, float y, float size, RenderWindow &window) : Personaggio(x, y, size, window) {
+Thief::Thief(float x, float y, float size, RenderWindow &window, Weapon *weapon) : Personaggio(x, y, size, window,
+                                                                                               weapon),
+                                                                                   weapon(*weapon) {
 
 
 }

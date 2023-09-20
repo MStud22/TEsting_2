@@ -4,7 +4,7 @@
 #include <iostream>
 #include "../header/Personaggio.h"
 
-Personaggio::Personaggio(float x, float y, float size, RenderWindow &window) :
+Personaggio::Personaggio(float x, float y, float size, RenderWindow &window, Weapon *weapon) :
         x_(x), y_(y), size_(size), window_(window)
 {
     //colore rappresentativo personaggio
@@ -380,5 +380,13 @@ void Personaggio::setTexture(string classe_) {
     sprite.setTexture(texture);
     sprite.setScale(2.7, 3);
 
+}
+
+Weapon *Personaggio::getWeapon() const {
+    return weapon;
+}
+
+void Personaggio::setWeapon(Weapon *weapon) {
+    Personaggio::weapon = weapon;
 }
 

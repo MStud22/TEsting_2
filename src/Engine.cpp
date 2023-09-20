@@ -50,7 +50,7 @@ void Engine::run() {
     //CREA IL PERSONAGGIO DOPO HE è STATA SCELTA LA CLASSE
     Personaggio *p;
 
-
+    Weapon *W;
 
 
     //animazione Switch / stanze
@@ -101,21 +101,22 @@ void Engine::run() {
                     "knight")      //TODO implementare tutte le altre classi con le loro fparticolari funzionalità
                 {
                     cout << "scelto cavaliere" << endl;
+                    W = new Weapon(10, "sword");
+                    p = new Knight(100, 200, 30, window, W);
 
-                    p = new Knight(100, 200, 30, window);
                 } else if (classe == "Mage") {
                     cout << "scelto mago " << endl;
-
-                    p = new Mage(100, 200, 30, window);
+                    W = new Weapon(15, "staff");
+                    p = new Mage(100, 200, 30, window, W);
                 } else if (classe == "thief") {
 
                     cout << "scelto ladro " << endl;
-
-                    p = new Thief(100, 200, 30, window);
+                    W = new Weapon(8, "knife");
+                    p = new Thief(100, 200, 30, window, W);
                 } else {
                     cout << "Errore" << endl;
 
-                    p = new Personaggio(100, 200, 30, window);
+                    p = new Personaggio(100, 200, 30, window, W);
                 }
 
                 p->setClasse(classe);

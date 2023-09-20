@@ -5,6 +5,7 @@
 #ifndef TESTING_2_PERSONAGGIO_H
 #define TESTING_2_PERSONAGGIO_H
 #include "Engine.h"
+#include "Weapon.h"
 
 class Personaggio {
 public:
@@ -20,8 +21,10 @@ public:
     float x_, y_;
     string classe_;
 
+    Weapon *weapon;
 
-    Personaggio(float x, float y, float size, RenderWindow &window);
+
+    Personaggio(float x, float y, float size, RenderWindow &window, Weapon *weapon);
 
     void disegna();
 
@@ -53,6 +56,10 @@ public:
     void setClasse(const string &classe);
 
     void setTexture(string classe_);
+
+    Weapon *getWeapon() const;
+
+    void setWeapon(Weapon *weapon);
 
 protected:
     Texture texture;

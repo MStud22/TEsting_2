@@ -10,7 +10,12 @@
 class Thief : public Personaggio {
 
 public :
-    Thief(float x, float y, float size, RenderWindow &window);
+    int hp;
+    int armor;
+    Weapon weapon;
+
+
+    Thief(float x, float y, float size, RenderWindow &window, Weapon *weapon);
 
     void Camminata_DOWN() override;
 

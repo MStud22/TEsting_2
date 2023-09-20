@@ -4,6 +4,17 @@
 
 #include "../header/Knight.h"
 
-Knight::Knight(float x, float y, float size, RenderWindow &window) : Personaggio(x, y, size, window) {
+Knight::Knight(float x, float y, float size, RenderWindow &window, Weapon *weapon) : Personaggio(x, y, size, window,
+                                                                                                 weapon),
+                                                                                     weapon(*weapon) {
 
+}
+
+
+const Weapon &Knight::getWeapon() const {
+    return weapon;
+}
+
+void Knight::setWeapon(const Weapon &weapon) {
+    Knight::weapon = weapon;
 }

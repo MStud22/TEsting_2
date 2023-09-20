@@ -11,8 +11,11 @@
 class Mage : public Personaggio {
 
 public :
+    int hp;
+    int armor;
+    Weapon weapon;
 
-    Mage(float x, float y, float size, RenderWindow &window);
+    Mage(float x, float y, float size, RenderWindow &window, Weapon *weapon);
 
     void Camminata_SX() override;
 

@@ -7,12 +7,29 @@
 
 #include "Engine.h"
 #include "Personaggio.h"
+#include "Weapon.h"
 
 class Knight : public Personaggio {
 
 public :
+    int hp;
+    int armor;
+    Weapon weapon;
 
-    Knight(float x, float y, float size, RenderWindow &window);
+
+    Knight(float x, float y, float size, RenderWindow &window, Weapon *weapon);
+
+    int getHp() const;
+
+    void setHp(int hp);
+
+    int getArmor() const;
+
+    void setArmor(int armor);
+
+    const Weapon &getWeapon() const;
+
+    void setWeapon(const Weapon &weapon);
 };
 
 
