@@ -61,6 +61,14 @@ public:
 
     void setWeapon(Weapon *weapon);
 
+    int getHp() const;
+
+    void setHp(int hp);
+
+    int getArmor() const;
+
+    void setArmor(int armor);
+
 protected:
     Texture texture;
     Sprite sprite;
@@ -76,6 +84,8 @@ protected:
     int swap_frame = 0;
     int swap_frame_camminata = 0;
 private:
+    int hp;
+    int armor;
 
 
 };

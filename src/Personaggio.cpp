@@ -387,3 +387,19 @@ void Personaggio::setWeapon(Weapon *weapon) {
     Personaggio::weapon = weapon;
 }
 
+int Personaggio::getHp() const {
+    return hp;
+}
+
+void Personaggio::setHp(int hp) {
+    this->hp = hp;
+}
+
+int Personaggio::getArmor() const {
+    return armor;
+}
+
+void Personaggio::setArmor(int armor) {
+    this->armor = armor;
+}
+

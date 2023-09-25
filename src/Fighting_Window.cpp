@@ -5,7 +5,9 @@
 #include "../header/Fighting_Window.h"
 
 
-Fighting_Window::Fighting_Window(sf::RenderWindow &window) : window(window) {}
+Fighting_Window::Fighting_Window(RenderWindow &window, Personaggio *p) : window(window) {
+
+}
 
 void Fighting_Window::draw() {
 
@@ -72,6 +74,24 @@ void Fighting_Window::draw() {
     itemsText.setPosition(fightText.getPosition().x + 170, fightText.getPosition().y + 40);
     window.draw(itemsText);
 
+    for (int i = 0; i < (p->getHp() / 5); ++i) {
+        sf::RectangleShape Bar(sf::Vector2f(30, 20));
+        Bar.setPosition((window.getSize().x / 2) + (35 * i), fightText.getPosition().y);
+        Bar.setFillColor(sf::Color::Green);
+        Health_Bar.push_back(Bar);
+    }
 
+    for (auto &HP: Health_Bar) {
+        window.draw(HP);
+    }
     window.display();
 }
+
+Personaggio *Fighting_Window::getP() const {
+    return p;
+}
+
+void Fighting_Window::setP(Personaggio *p) {
+    Fighting_Window::p = p;
+}
+

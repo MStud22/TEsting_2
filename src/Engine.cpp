@@ -48,15 +48,15 @@ void Engine::run() {
     //implementazione scelta personaggio
     Scelta_personaggio chose(window);
 
-    //implementazione combattimento
-    Fighting_Window FG(window);
+
 
     //CREA IL PERSONAGGIO DOPO HE è STATA SCELTA LA CLASSE
     Personaggio *p;
 
     Weapon *W;
 
-
+    //implementazione combattimento
+    Fighting_Window FG(window, p);
 
 
     //animazione Switch / stanze
@@ -108,16 +108,24 @@ void Engine::run() {
                     cout << "scelto cavaliere" << endl;
                     W = new Weapon(10, "sword");
                     p = new Knight(100, 200, 30, window, W);
+                    p->setHp(40);
+                    FG.setP(p);
 
                 } else if (classe == "Mage") {
                     cout << "scelto mago " << endl;
                     W = new Weapon(15, "staff");
                     p = new Mage(100, 200, 30, window, W);
+                    p->setHp(25);
+                    FG.setP(p);
+
                 } else if (classe == "thief") {
 
                     cout << "scelto ladro " << endl;
                     W = new Weapon(8, "knife");
                     p = new Thief(100, 200, 30, window, W);
+                    p->setHp(32);
+                    FG.setP(p);
+
                 } else {
                     cout << "Errore" << endl;
 

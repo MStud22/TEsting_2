@@ -14,7 +14,7 @@ class Fighting_Window {
 public:
     void draw();
 
-    Fighting_Window(sf::RenderWindow &window);
+    Fighting_Window(sf::RenderWindow &window, Personaggio *p);
 
 private :
     sf::RenderWindow &window;
@@ -27,11 +27,16 @@ private :
     sf::Text talkText;
     sf::Text itemsText;
 
+    std::vector<sf::RectangleShape> Health_Bar;
 
     sf::Font fontText;
 
     Personaggio *p;
 
+public:
+    Personaggio *getP() const;
+
+    void setP(Personaggio *p);
 };
 
 
