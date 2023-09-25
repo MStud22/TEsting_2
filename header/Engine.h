@@ -29,6 +29,7 @@ public:
 
     bool startMenu = true;
     bool scelta_personaggio = false;
+    bool fight = false;
 
     //abbiamo bisogno di un main loop per effettture il run
     void run();

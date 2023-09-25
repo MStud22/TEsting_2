@@ -14,6 +14,7 @@ public:
     sf::RectangleShape bottom;
     sf::RectangleShape entrance;
     sf::RectangleShape exit;
+    sf::RectangleShape enemy;
     std::vector<sf::RectangleShape> innerWalls;
     std::vector<sf::RectangleShape> OuterWalls;
 

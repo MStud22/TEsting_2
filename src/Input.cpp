@@ -51,7 +51,13 @@ void Engine::input() {
 
                 }
             }
-
+        if (fight) {
+            if (event.type == Event::KeyPressed) {
+                if (Keyboard::isKeyPressed(Keyboard::F)) {
+                    fight = false;
+                }
+            }
+        }
 
     }
 }

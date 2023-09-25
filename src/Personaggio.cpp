@@ -84,7 +84,6 @@ void Personaggio::aggiornaPosizione() {
 
     steady = false;
     key_pressed = false;
-    //todo fix if per evitare interruzioni nell'animazione
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && Personaggio::collisione != "left") {
         x_ -= size_ / 10.0f;
         steady = false;
@@ -299,7 +298,6 @@ void Personaggio::Camminata_SX() {
 }
 
 void Personaggio::Camminata_UP() {
-    //TODO rimuovi i primi due frame del personaggio per non farlo girare mentre cammina
 
     if (swap_frame_camminata == 0) {
         texture.loadFromFile("../assets/" + classe_ + "_animation/animazione_camminata_up/" + classe_ + "UP-1.png");
@@ -372,7 +370,6 @@ void Personaggio::setClasse(const string &classe) {
     classe_ = classe;
 }
 
-//todo rimuovi test
 
 void Personaggio::setTexture(string classe_) {
     //imposta sprite immaggine

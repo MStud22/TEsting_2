@@ -18,3 +18,21 @@ const Weapon &Knight::getWeapon() const {
 void Knight::setWeapon(const Weapon &weapon) {
     Knight::weapon = weapon;
 }
+
+int Knight::getHp() const {
+    return hp;
+}
+
+void Knight::setHp(int hp) {
+    this->hp = hp;
+}
+
+int Knight::getArmor() const {
+    return armor;
+}
+
+void Knight::setArmor(int armor) {
+    this->armor = armor;
+}
+
+

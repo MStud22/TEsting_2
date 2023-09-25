@@ -30,6 +30,8 @@ public :
     const Weapon &getWeapon() const;
 
     void setWeapon(const Weapon &weapon);
+
+
 };
 
 

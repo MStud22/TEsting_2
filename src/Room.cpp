@@ -51,7 +51,8 @@ void Room::Pick_Room() {
     std::srand(std::time(nullptr));
     int room_number = std::rand() % 3 + 1;
 
-
+    //todo rimuovi tester
+    room_number = 1;
 
     if (room_number == 1) {
         genera_FANGS();
@@ -74,7 +75,9 @@ void Room::drawRoom(sf::RenderWindow &window) {
     window.draw(right);
     window.draw(entrance);
     window.draw(exit);
+    window.draw(enemy);
 
+    // da rimuovere o no dipendentemente se si vogliono visualzzare i muri
     /*
     for (const auto &wall: innerWalls) {
         window.draw(wall);
@@ -136,6 +139,12 @@ void Room::genera_FANGS() {
 
 
     Room::entrance.setPosition(width_ - (width_ / 10), height_ / 2);
+
+    //TODO remove test enemy
+    //crea l'hitbox per avviare il combattimento
+    Room::enemy.setSize(sf::Vector2f(20.f, 20.f));
+    Room::enemy.setFillColor(sf::Color::Red);
+    Room::enemy.setPosition((width_ / 10) * 5, height_ / 2 + (height_ / 4));
 }
 
 void Room::genera_ZIGZAG() {
@@ -215,5 +224,4 @@ void Room::genera_LONGCORRIDOR() {
     Room::entrance.setPosition(width_ - (width_ / 10), height_ / 2);
 }
 
-//TODO sviluppare la stanza di scelta personaggio, dovra essere una stanza speciale che si genera solo a inizio partita e mai più
 

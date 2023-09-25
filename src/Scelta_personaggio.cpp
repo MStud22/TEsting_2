@@ -86,7 +86,6 @@ void Scelta_personaggio::draw() {
 
     //gli spostamenti relativi a x sono stati fatti ""a mano"" per gestire la dimensione del formato visivo
     //////////////////////////////////////////////////////////////////////////////////////////////////
-    //TODO viuslizzare immagini o close up dei personaggi (tipo METAL SLUG)
 
     //impostazione immagine e posizione close-ip Knight
     sf::Texture Knight_closeup;

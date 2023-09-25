@@ -11,6 +11,7 @@
 #include "../header/Knight.h"
 #include "../header/Mage.h"
 #include "../header/Thief.h"
+#include "../header/Fighting_Window.h"
 
 
 const sf::Time Engine::
@@ -47,10 +48,15 @@ void Engine::run() {
     //implementazione scelta personaggio
     Scelta_personaggio chose(window);
 
+    //implementazione combattimento
+    Fighting_Window FG(window);
+
     //CREA IL PERSONAGGIO DOPO HE è STATA SCELTA LA CLASSE
     Personaggio *p;
 
     Weapon *W;
+
+
 
 
     //animazione Switch / stanze
@@ -64,7 +70,7 @@ void Engine::run() {
     //stanza e variabili di appoggio per il suo funzionamento
     Room room(800, 400);
 
-    //todo rimuovi o intgra controllo
+
 
 
     while (window.isOpen()) {
@@ -98,8 +104,7 @@ void Engine::run() {
             input();
             if (choise_done) {
                 if (classe ==
-                    "knight")      //TODO implementare tutte le altre classi con le loro fparticolari funzionalità
-                {
+                    "knight") {
                     cout << "scelto cavaliere" << endl;
                     W = new Weapon(10, "sword");
                     p = new Knight(100, 200, 30, window, W);
@@ -124,6 +129,21 @@ void Engine::run() {
             }
 
             cout << classe << endl;
+        }
+        if (fight) {
+            //todo implementare animazione snake
+
+            if (clock.getElapsedTime().asSeconds() > 0.5f) // impostiamo un intervallo di 0,5 secondi
+            {
+                visible = !visible; // invertiamo la visibilità del testo
+                clock.restart(); // riavviamo l'orologio
+            }
+            if (visible) {
+                FG.draw();
+
+            }
+            input();
+
         }
 
 
@@ -180,6 +200,11 @@ void Engine::run() {
                 AnimatingSnake = true;
 
             }
+            if (p->getCollisionRect().intersects((room.enemy.getGlobalBounds()))) {
+                window.clear();
+                AnimatingSnake = true;
+                fight = true;
+            }
             window.display();
         }
 
@@ -194,17 +219,18 @@ void Engine::run() {
 
         /* ///////////////////////////////// ANIMAZIONE///////////////////////////////////////*/
 
-        while (AnimatingSnake && !startMenu && !scelta_personaggio) {
+        while (AnimatingSnake && !startMenu && !scelta_personaggio && !fight) {
             snake.update(dt);
             window.clear();
             snake.draw();
-            if (snake.isFinished()) {
+            if (snake.isFinished() && !fight) {
                 AnimatingSnake = false;
                 room.Pick_Room();
                 snake.Reset();
                 p->setPosition(100, 200);
                 break;
             }
+
             window.display();
         }
 
